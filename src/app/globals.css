@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* daisyUI (v5 방식): Tailwind v4에선 CSS에서 플러그인 선언 */
+@plugin "daisyui";
+
+/* (선택) 테마 기본값 지정: light를 기본, 시스템 다크 우선 */
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
