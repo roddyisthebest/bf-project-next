@@ -10,14 +10,14 @@ import RectangleButton from "./components/rectangle-button";
 import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Label } from "@/components/ui/label";
-import { routes, timeTable } from "./consts";
+import { subRoutes, timeTable } from "./consts";
 
 export default function WebPage() {
   return (
     <div className="border-brand-100 border-x min-h-[80vh]">
       <div className="bg-primary h-64"></div>
       <div className="grid grid-cols-4 divide-x divide-brand-100">
-        {routes.map((route) => (
+        {subRoutes.map((route) => (
           <RectangleButton key={route.id} {...route} />
         ))}
       </div>
