@@ -40,7 +40,9 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
+  --color-primary: var(--brand-600);
+  --color-primary-100: var(--brand-100);
+  --color-primary-50: var(--brand-50);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -49,6 +51,16 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* muted / accent 등 서브 의미 토큰도 브랜드 톤으로 매핑 가능 */
+  --color-muted: var(--brand-100);
+  --color-accent: var(--brand-50);
+
+  /* 회색계 (text-neutral-600, border-neutral-600처럼 쓰고 싶다면 단계도 선언) */
+  --color-neutral: var(--gray-600);
+  --color-neutral-600: var(--gray-600);
+  --color-neutral-900: var(--gray-900);
+  --color-neutral-100: var(--gray-100);
 }
 
 :root {
@@ -68,7 +80,7 @@
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
+  --border: #ddf3e4;
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
@@ -84,6 +96,14 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --brand-600: #1c6039; /* 메인색상 */
+  --brand-100: #ddf3e4; /* 라이트 */
+  --brand-50: #f0fdf4; /* 헤비 라이트(더 옅은 톤) */
+
+  /* 그레이 */
+  --gray-600: #676767;
+  --gray-900: #111111; /* 필요시 */
+  --gray-100: #f5f5f5; /* 필요시 */
 }
 
 .dark {
@@ -118,6 +138,15 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  /* 메인 · 톤 */
+  --brand-600: #1c6039; /* 메인색상 */
+  --brand-100: #ddf3e4; /* 라이트 */
+  --brand-50: #f0fdf4; /* 헤비 라이트(더 옅은 톤) */
+
+  /* 그레이 */
+  --gray-600: #676767;
+  --gray-900: #111111; /* 필요시 */
+  --gray-100: #f5f5f5; /* 필요시 */
 }
 
 @layer base {
@@ -126,5 +155,339 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* === Breaking Bad 무드: 연기 + 네온 글로우 + 플리커 === */
+
+/* 1) Keyframes */
+@keyframes smoke {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.25;
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 0.4;
+    filter: blur(2px);
+  }
+  100% {
+    transform: translateY(-40px) scale(1.06);
+    opacity: 0;
+    filter: blur(6px);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  19%,
+  21%,
+  23%,
+  80%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  22% {
+    opacity: 0.6;
+  }
+  81% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    text-shadow: 0 0 12px color-mix(in oklch, var(--brand-600) 35%, transparent);
+  }
+  50% {
+    text-shadow: 0 0 20px color-mix(in oklch, var(--brand-600) 60%, transparent);
+  }
+}
+
+/* 2) Utilities (Tailwind v4) */
+@utility animate-smoke {
+  animation: smoke 3.6s ease-out infinite;
+}
+@utility animate-smoke-2 {
+  animation: smoke 4.2s ease-out infinite;
+}
+@utility animate-smoke-3 {
+  animation: smoke 5s ease-out infinite;
+}
+@utility animate-flicker {
+  animation: flicker 3.5s linear infinite;
+}
+@utility animate-glow {
+  animation: glow 2.4s ease-in-out infinite;
+}
+
+/* 3) 접근성: 모션 최소화 선호 시 애니메이션 제거 */
+@media (prefers-reduced-motion: reduce) {
+  .animate-smoke,
+  .animate-smoke-2,
+  .animate-smoke-3,
+  .animate-flicker,
+  .animate-glow {
+    animation: none !important;
+  }
+}
+
+/* 4) 브베 타일(Br/Ba) 오마주용 살짝 꾸밈 */
+.bb-tile {
+  @apply inline-flex h-9 items-center justify-center rounded-sm border px-2 font-semibold tracking-wide;
+  border-color: color-mix(in oklch, var(--brand-600) 60%, transparent);
+  background: color-mix(in oklch, var(--brand-100) 20%, transparent);
+}
+.dark .bb-tile {
+  background: color-mix(in oklch, var(--brand-600) 20%, transparent);
+  border-color: color-mix(in oklch, var(--brand-100) 60%, transparent);
+}
+
+/* === Smoke / Glow / Flicker animations (Tailwind v4, CSS-only) === */
+
+/* 1) Keyframes */
+@keyframes smoke {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.25;
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 0.4;
+    filter: blur(2px);
+  }
+  100% {
+    transform: translateY(-40px) scale(1.06);
+    opacity: 0;
+    filter: blur(6px);
+  }
+}
+
+@keyframes smoke2 {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.2;
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 0.35;
+    filter: blur(2px);
+  }
+  100% {
+    transform: translateY(-56px) scale(1.08);
+    opacity: 0;
+    filter: blur(7px);
+  }
+}
+
+@keyframes smoke3 {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.18;
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 0.3;
+    filter: blur(2px);
+  }
+  100% {
+    transform: translateY(-72px) scale(1.1);
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  19%,
+  21%,
+  23%,
+  80%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  22% {
+    opacity: 0.6;
+  }
+  81% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    text-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+  } /* emerald-500-ish */
+  50% {
+    text-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+  }
+}
+
+/* 2) Utilities */
+@utility animate-smoke {
+  animation: smoke 3.6s ease-out infinite;
+}
+@utility animate-smoke2 {
+  animation: smoke2 4.4s ease-out infinite;
+}
+@utility animate-smoke3 {
+  animation: smoke3 5.2s ease-out infinite;
+}
+@utility animate-flicker {
+  animation: flicker 3.5s linear infinite;
+}
+@utility animate-glow {
+  animation: glow 2.4s ease-in-out infinite;
+}
+
+/* 3) A11y: 모션 최소화 환경 */
+@media (prefers-reduced-motion: reduce) {
+  .animate-smoke,
+  .animate-smoke2,
+  .animate-smoke3,
+  .animate-flicker,
+  .animate-glow {
+    animation: none !important;
+  }
+}
+
+/* ===== Stronger Smoke + Horizontal Drift + Muzzle Flash ===== */
+
+/* 연기: 위로 떠오르면서 좌우로 살짝 흔들리는 효과 */
+@keyframes smoke-rise {
+  0% {
+    transform: translate(var(--dx, 0), 0) scale(var(--scale, 1));
+    opacity: var(--startOpacity, 0.35);
+    filter: blur(0px);
+  }
+  40% {
+    opacity: var(--midOpacity, 0.45);
+    filter: blur(2px);
+  }
+  100% {
+    transform: translate(calc(var(--dx, 0) * 3), var(--rise, -80px))
+      scale(calc(var(--scale, 1) * 1.08));
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+/* 약한 좌우 흔들림(시차감) */
+@keyframes smoke-sway {
+  0% {
+    transform: translateX(-3px);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(-3px);
+  }
+}
+
+/* 네온 글로우/플리커는 기존 그대로 두거나, 없으면 아래 사용 */
+@keyframes glow {
+  0%,
+  100% {
+    text-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+  }
+  50% {
+    text-shadow: 0 0 22px rgba(16, 185, 129, 0.6);
+  }
+}
+@keyframes flicker {
+  0%,
+  19%,
+  21%,
+  23%,
+  80%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  22% {
+    opacity: 0.6;
+  }
+  81% {
+    opacity: 0.85;
+  }
+}
+
+/* 총구 화염(짧게 번쩍 + 팝 스파크) */
+@keyframes muzzle-flash {
+  0% {
+    transform: scale(0.4) rotate(0deg);
+    opacity: 0.9;
+    filter: blur(0.5px);
+  }
+  30% {
+    transform: scale(1.2) rotate(8deg);
+    opacity: 1;
+    filter: blur(0.3px);
+  }
+  100% {
+    transform: scale(0.1) rotate(15deg);
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+@keyframes spark-pop {
+  0% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--sx, 20px), var(--sy, -18px)) scale(0.1);
+    opacity: 0;
+  }
+}
+
+/* Tailwind v4 커스텀 유틸리티  */
+@utility animate-glow {
+  animation: glow 2.4s ease-in-out infinite;
+}
+@utility animate-flicker {
+  animation: flicker 3.5s linear infinite;
+}
+
+/* 기존 animate-smoke… 대신 “강화형” */
+@utility animate-smoke-strong {
+  animation: smoke-rise var(--dur, 4s) ease-out infinite;
+}
+@utility animate-smoke-strong-2 {
+  animation: smoke-rise var(--dur, 5s) ease-out infinite;
+}
+@utility animate-smoke-strong-3 {
+  animation: smoke-rise var(--dur, 6s) ease-out infinite;
+}
+
+/* 살짝의 상시 흔들림 추가 */
+@utility animate-sway {
+  animation: smoke-sway 6s ease-in-out infinite;
+}
+
+/* 총구화염 유틸 */
+@utility animate-muzzle {
+  animation: muzzle-flash 0.22s ease-out;
+}
+@utility animate-spark {
+  animation: spark-pop 0.35s ease-out;
+}
+
+/* 접근성: 모션 최소화 시 정지 */
+@media (prefers-reduced-motion: reduce) {
+  .animate-glow,
+  .animate-flicker,
+  .animate-smoke-strong,
+  .animate-smoke-strong-2,
+  .animate-smoke-strong-3,
+  .animate-sway,
+  .animate-muzzle,
+  .animate-spark {
+    animation: none !important;
   }
 }
