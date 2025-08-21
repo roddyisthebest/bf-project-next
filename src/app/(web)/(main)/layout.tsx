@@ -57,8 +57,10 @@ export default async function MainLayout({
         {/* 하단 에메랄드 라인 글로우 */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-emerald-300/60 to-transparent" />
       </header>
-
-      <main className="relative z-10">{children}</main>
+      <main className="relative z-10 px-36 max-xl:px-30 max-lg:px-18 max-md:px-6">
+        {children}
+      </main>
+      <footer className="h-24 bg-primary"></footer>
     </div>
   );
 }
