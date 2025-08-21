@@ -20,7 +20,7 @@ export default async function MainLayout({
       <div className="pointer-events-none absolute inset-0 [background:repeating-linear-gradient(90deg,rgba(16,185,129,0.045),rgba(16,185,129,0.045)_1px,transparent_1px,transparent_24px)] opacity-40" />
       <div className="pointer-events-none absolute inset-0 [background:repeating-linear-gradient(0deg,rgba(16,185,129,0.035),rgba(16,185,129,0.035)_1px,transparent_1px,transparent_24px)] opacity-40" />
 
-      <header className="relative z-10 border-b border-emerald-100 bg-gradient-to-b from-emerald-50/60 to-white backdrop-blur">
+      <header className=" sticky top-0 border-b border-emerald-100 bg-gradient-to-b from-emerald-50/60 to-white backdrop-blur z-50">
         <div className="h-20 flex items-center justify-between px-4">
           <div className="flex items-center gap-4">
             {/* 타이틀에 살짝 BB 요소(엣지 라인 + 라운드) */}

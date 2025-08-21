@@ -13,6 +13,18 @@ export const subRoutes = [
     label: "교회소개",
     href: "/about/worship",
   },
+  {
+    id: 3,
+    icon: <BookOpen />,
+    label: "교회소개",
+    href: "/about/worship",
+  },
+  {
+    id: 4,
+    icon: <BookOpen />,
+    label: "교회소개",
+    href: "/about/worship",
+  },
 ];
 
 interface Route {

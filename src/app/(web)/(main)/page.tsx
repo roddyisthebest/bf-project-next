@@ -16,17 +16,21 @@ export default function WebPage() {
   return (
     <div className="border-brand-100 border-x min-h-[80vh]">
       <div className="bg-primary h-64"></div>
-      <div className="grid grid-cols-4 divide-x divide-brand-100">
+      <div
+        className="
+    grid max-md:grid-cols-1 grid-cols-4  max-md:divide-y divide-x"
+      >
         {subRoutes.map((route) => (
           <RectangleButton key={route.id} {...route} />
         ))}
       </div>
+
       <Separator className="border-brand-100" />
-      <div className="grid grid-cols-[3fr_7fr] divide-x divide-brand-100">
+      <div className="grid grid-cols-[3fr_7fr] max-lg:grid-cols-[4fr_6fr]  divide-x divide-brand-100">
         <div className="p-5 flex flex-col gap-y-5">
           <div className="flex flex-col gap-y-1">
             <Label className="text-primary font-bold text-xl">MINISTOR</Label>
-            <p className="text-neutral text-lg font-medium">
+            <p className="text-neutral text-lg font-medium max-sm:flex max-sm:flex-col">
               담임목사 <strong className="text-black">이희동</strong>
             </p>
           </div>
@@ -39,10 +43,10 @@ export default function WebPage() {
           </div>
           <div className="flex flex-col gap-y-4">
             <div className="flex flex-col gap-y-4">
-              <h1 className="text-black font-bold text-5xl truncate">
+              <h1 className="text-black font-bold text-5xl max-xl:text-4xl max-lg:text-3xl max-sm:text-xl truncate">
                 이렇게 저렇게 해라
               </h1>
-              <div className="flex gap-x-2">
+              <div className="flex gap-2 flex-wrap">
                 <Badge className="bg-primary-50 border-primary-100 text-primary text-sm py-2 px-3 font-semibold flex gap-x-2">
                   <Calendar />
                   2025.08.12
@@ -68,7 +72,7 @@ export default function WebPage() {
       </div>
       <Separator className="border-brand-100" />
 
-      <div className="grid grid-cols-2 divide-x divide-brand-100">
+      <div className="grid grid-cols-2 max-lg:grid-cols-1 max-lg:divide-y divide-x divide-brand-100">
         <div className="p-5 flex flex-col gap-y-5">
           <div className="flex flex-col gap-y-1">
             <Label className="text-primary font-bold text-xl">TIME TABLE</Label>
@@ -80,8 +84,10 @@ export default function WebPage() {
                 className="flex justify-between items-center text-lg! text-black font-bold pb-2"
                 key={idx}
               >
-                <Label className="text-lg font-bold">{time.title}</Label>
-                <div className="text-lg">{time.content}</div>
+                <Label className="text-lg font-bold max-sm:text-sm">
+                  {time.title}
+                </Label>
+                <div className="text-lg max-sm:text-sm">{time.content}</div>
               </div>
             ))}
           </div>
@@ -93,7 +99,7 @@ export default function WebPage() {
             </Label>
             <p className="text-neutral text-lg font-medium">오시는길</p>
           </div>
-          <div className="bg-neutral flex-1"></div>
+          <div className="bg-neutral flex-1 max-lg:min-h-96"></div>
         </div>
       </div>
       <Separator className="border-brand-100" />

@@ -15,14 +15,14 @@ import { routes } from "../consts";
 
 export function NavigationMenuDemo() {
   return (
-    <NavigationMenu viewport={false}>
+    <NavigationMenu viewport={false} className="z-[9999]">
       <NavigationMenuList>
         {routes.map((route, idx) => (
           <NavigationMenuItem className="text-neutral" key={idx}>
             <NavigationMenuTrigger className="bg-transparent">
               {route.title}
             </NavigationMenuTrigger>
-            <NavigationMenuContent>
+            <NavigationMenuContent className="">
               <ul className="grid w-[200px] gap-4">
                 <li>
                   {route.subRoutes?.map((subRoute, subIdx) => (
