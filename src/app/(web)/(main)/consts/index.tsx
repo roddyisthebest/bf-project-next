@@ -36,7 +36,7 @@ interface Route {
 export const routes: Route[] = [
   {
     title: "교회소개",
-    href: "",
+    href: "/about",
     subRoutes: [
       {
         title: "인사말",
@@ -54,7 +54,7 @@ export const routes: Route[] = [
   },
   {
     title: "예배",
-    href: "",
+    href: "/chaple",
     subRoutes: [
       {
         title: "주일예배",
@@ -72,7 +72,7 @@ export const routes: Route[] = [
   },
   {
     title: "교육/양육",
-    href: "",
+    href: "/education",
     subRoutes: [
       {
         title: "새가족반",
@@ -86,7 +86,7 @@ export const routes: Route[] = [
   },
   {
     title: "다음세대",
-    href: "",
+    href: "/generation",
     subRoutes: [
       {
         title: "유아유초등부",
@@ -100,10 +100,7 @@ export const routes: Route[] = [
         title: "청년1부",
         href: "/generation/young-adults",
       },
-      {
-        title: "청년2부",
-        href: "/generation/young-adults-2",
-      },
+
       {
         title: "장년부",
         href: "/generation/adults",
@@ -112,7 +109,7 @@ export const routes: Route[] = [
   },
   {
     title: "선교",
-    href: "",
+    href: "/missions",
     subRoutes: [
       {
         title: "국내선교",
