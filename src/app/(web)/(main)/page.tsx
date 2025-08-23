@@ -66,13 +66,13 @@ export default function WebPage() {
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               />
-            </AspectRatio>{" "}
+            </AspectRatio>
           </div>
         </div>
       </div>
       <Separator className="border-brand-100" />
 
-      <div className="grid grid-cols-2 max-lg:grid-cols-1 max-lg:divide-y divide-x divide-brand-100">
+      <div className="grid grid-cols-2 max-lg:grid-cols-1 max-lg:divide-y max-lg:divide-x-0 divide-x divide-brand-100">
         <div className="p-5 flex flex-col gap-y-5">
           <div className="flex flex-col gap-y-1">
             <Label className="text-primary font-bold text-xl">TIME TABLE</Label>

@@ -95,7 +95,6 @@ export default async function Header() {
                   </Link>
                 )}
               </div>
-
               <MobileNavigationMenu />
             </div>
           </DialogContent>
