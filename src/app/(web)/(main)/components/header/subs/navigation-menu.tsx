@@ -11,11 +11,11 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { routes } from "../consts";
+import { routes } from "@/app/(web)/(main)/consts";
 
 export function NavigationMenuDemo() {
   return (
-    <NavigationMenu viewport={false} className="z-[9999]">
+    <NavigationMenu viewport={false} className="z-[9999] max-md:hidden">
       <NavigationMenuList>
         {routes.map((route, idx) => (
           <NavigationMenuItem className="text-neutral" key={idx}>

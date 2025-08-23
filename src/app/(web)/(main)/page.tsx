@@ -18,7 +18,7 @@ export default function WebPage() {
       <div className="bg-primary h-64"></div>
       <div
         className="
-    grid max-md:grid-cols-1 grid-cols-4  max-md:divide-y divide-x"
+    grid max-md:grid-cols-1 grid-cols-4  max-md:divide-y max-md:divide-x-0 divide-x"
       >
         {subRoutes.map((route) => (
           <RectangleButton key={route.id} {...route} />

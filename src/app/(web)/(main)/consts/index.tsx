@@ -112,7 +112,7 @@ export const routes: Route[] = [
   },
   {
     title: "선교",
-    href: "/",
+    href: "",
     subRoutes: [
       {
         title: "국내선교",
