@@ -23,7 +23,7 @@ export function LogoutButton() {
     <Button
       variant="outline"
       onClick={handleLogout}
-      className="rounded-xl border-emerald-200 text-emerald-800 hover:bg-emerald-50"
+      className="rounded-xl border-emerald-200 text-emerald-800 hover:bg-emerald-50 w-full"
     >
       로그아웃
     </Button>
