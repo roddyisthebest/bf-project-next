@@ -54,56 +54,59 @@ export const routes: Route[] = [
   },
   {
     title: "예배",
-    href: "/chaple",
+    href: "/chaples",
     subRoutes: [
       {
         title: "주일예배",
-        href: "/chaple",
+        href: "/chaples",
       },
       {
         title: "수요예배",
-        href: "/chaple/wednesday",
+        href: "/chaples/wednesday",
       },
       {
         title: "금요기도회",
-        href: "/chaple/friday",
+        href: "/chaples/friday",
       },
     ],
   },
   {
     title: "교육/양육",
-    href: "/education",
+    href: "/educations",
     subRoutes: [
       {
-        title: "새가족반",
-        href: "/education",
+        title: "새가족훈련",
+        href: "/educations",
       },
       {
-        title: "제자반",
-        href: "/education/discipleship",
+        title: "제자훈련",
+        href: "/educations/discipleship",
+      },
+      {
+        title: "사역훈련",
+        href: "/educations/ministry-training",
+      },
+      {
+        title: "일상(사랑방)",
+        href: "/educations/life-group",
       },
     ],
   },
   {
     title: "다음세대",
-    href: "/generation",
+    href: "/generations",
     subRoutes: [
       {
         title: "유아유초등부",
-        href: "/generation",
+        href: "/generations",
       },
       {
         title: "중고등부",
-        href: "/generation/teenagers",
+        href: "/generations/teenagers",
       },
       {
         title: "청년1부",
-        href: "/generation/young-adults",
-      },
-
-      {
-        title: "장년부",
-        href: "/generation/adults",
+        href: "/generations/young-adults",
       },
     ],
   },
@@ -118,6 +121,24 @@ export const routes: Route[] = [
       {
         title: "해외선교",
         href: "/missions/international",
+      },
+    ],
+  },
+  {
+    title: "자유게시판",
+    href: "/boards",
+    subRoutes: [
+      {
+        title: "소통방",
+        href: "/boards",
+      },
+      {
+        title: "사진/갤러리",
+        href: "/boards/gallery",
+      },
+      {
+        title: "은혜 나눔터",
+        href: "/boards/testimony",
       },
     ],
   },
