@@ -30,8 +30,6 @@ const formatDate = (v: string | number | Date) =>
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
   }).format(new Date(v));
 
 export function ChaplesTable({
@@ -156,17 +154,21 @@ export function ChaplesTable({
             <TableHeader className="bg-primary-50">
               <TableRow>
                 <TableHead className="w-[60px]">#</TableHead>
-                <TableHead className="min-w-[200px] truncate">제목</TableHead>
-                <TableHead className="w-[140px]">유형</TableHead>
-                <TableHead className="w-[120px]">작성일</TableHead>
-                <TableHead className="w-[120px] ">수정일</TableHead>
-                <TableHead className="w-[60px]">열람</TableHead>
+                <TableHead className="min-w-[120px] truncate">제목</TableHead>
+                <TableHead>유형</TableHead>
+                <TableHead>작성일</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {rows.length ? (
                 rows.map((r) => (
-                  <TableRow key={r.id}>
+                  <TableRow
+                    key={r.id}
+                    onClick={() => router.push(getDetailPath(r))}
+                    role="link"
+                    tabIndex={0}
+                    className="cursor-pointer hover:bg-muted/50"
+                  >
                     <TableCell>{r.id}</TableCell>
                     <TableCell className="truncate max-w-[200px]">
                       <span className="font-medium">{r.title}</span>
@@ -178,14 +180,6 @@ export function ChaplesTable({
                     </TableCell>
                     <TableCell className="text-muted-foreground">
                       {formatDate(r.created_at)}
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">
-                      {formatDate(r.updated_at)}
-                    </TableCell>
-                    <TableCell>
-                      <Button asChild variant="outline" size="sm">
-                        <Link href={getDetailPath(r)}>보기</Link>
-                      </Button>
                     </TableCell>
                   </TableRow>
                 ))
