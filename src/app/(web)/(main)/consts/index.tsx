@@ -163,3 +163,8 @@ export const timeTable = [
     content: "월-목 오전 05:30",
   },
 ];
+
+export const locationCoordinate = {
+  x: 37.501258,
+  y: 127.03959,
+};
