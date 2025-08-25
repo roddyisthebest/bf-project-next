@@ -14,7 +14,7 @@ export default async function MainLayout({
 
       <Header />
       <div className="bg-primary h-64"></div>
-      <main className="relative z-10 px-36 max-xl:px-30 max-lg:px-18 max-md:px-6">
+      <main className="relative z-10 px-36 max-xl:px-6  max-md:px-4 ">
         {children}
       </main>
       <footer className="h-24 bg-primary"></footer>

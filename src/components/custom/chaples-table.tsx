@@ -64,6 +64,7 @@ export function ChaplesTable({
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const isAdmin = pathname?.startsWith("/admin") ?? false;
 
   const pageCount = Math.max(1, Math.ceil(total / pageSize));
 
@@ -105,6 +106,11 @@ export function ChaplesTable({
   const goNext = () =>
     page < pageCount && pushWithParams({ q, sort, page: page + 1, pageSize });
 
+  const getDetailPath = (chaple: ChapleView) =>
+    isAdmin
+      ? `/admin/chaples/${chaple.id}/edit`
+      : `/chaples/${chaple.id}/detail?type=${chaple.type}`;
+
   return (
     <div className="w-full">
       {/* Toolbar */}
@@ -135,59 +141,64 @@ export function ChaplesTable({
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Button asChild className="ml-2">
-          <Link href="/admin/chaples/new">Create</Link>
-        </Button>
+        {isAdmin && (
+          <Button asChild className="ml-2">
+            <Link href="/admin/chaples/new">Create</Link>
+          </Button>
+        )}
       </div>
 
       {/* Table */}
-      <div className="overflow-hidden rounded-md border">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[64px]">#</TableHead>
-              <TableHead>제목</TableHead>
-              <TableHead className="w-[140px]">유형</TableHead>
-              <TableHead className="w-[180px]">작성일</TableHead>
-              <TableHead className="w-[180px]">수정일</TableHead>
-              <TableHead className="w-[120px]">열람</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {rows.length ? (
-              rows.map((r) => (
-                <TableRow key={r.id}>
-                  <TableCell>{r.id}</TableCell>
-                  <TableCell>
-                    <span className="font-medium">{r.title}</span>
-                  </TableCell>
-                  <TableCell>
-                    <span className="uppercase text-xs tracking-wide">
-                      {r.type ?? "-"}
-                    </span>
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">
-                    {formatDate(r.created_at)}
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">
-                    {formatDate(r.updated_at)}
-                  </TableCell>
-                  <TableCell>
-                    <Button asChild variant="outline" size="sm">
-                      <Link href={`/admin/chaples/${r.id}/edit`}>보기</Link>
-                    </Button>
+      <div className="rounded-md border">
+        {/* 스크롤 가능 컨테이너 */}
+        <div className="w-full overflow-x-auto">
+          <Table className="min-w-[700px]">
+            <TableHeader className="bg-primary-50">
+              <TableRow>
+                <TableHead className="w-[60px]">#</TableHead>
+                <TableHead className="min-w-[200px] truncate">제목</TableHead>
+                <TableHead className="w-[140px]">유형</TableHead>
+                <TableHead className="w-[120px]">작성일</TableHead>
+                <TableHead className="w-[120px] ">수정일</TableHead>
+                <TableHead className="w-[60px]">열람</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {rows.length ? (
+                rows.map((r) => (
+                  <TableRow key={r.id}>
+                    <TableCell>{r.id}</TableCell>
+                    <TableCell className="truncate max-w-[200px]">
+                      <span className="font-medium">{r.title}</span>
+                    </TableCell>
+                    <TableCell>
+                      <span className="uppercase text-xs tracking-wide">
+                        {r.type ?? "-"}
+                      </span>
+                    </TableCell>
+                    <TableCell className="text-muted-foreground">
+                      {formatDate(r.created_at)}
+                    </TableCell>
+                    <TableCell className="text-muted-foreground">
+                      {formatDate(r.updated_at)}
+                    </TableCell>
+                    <TableCell>
+                      <Button asChild variant="outline" size="sm">
+                        <Link href={getDetailPath(r)}>보기</Link>
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={6} className="h-24 text-center">
+                    No results.
                   </TableCell>
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={6} className="h-24 text-center">
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              )}
+            </TableBody>
+          </Table>
+        </div>
       </div>
 
       {/* Footer: pagination */}
