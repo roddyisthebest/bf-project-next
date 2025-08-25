@@ -35,6 +35,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Link from "next/link";
 
 const data: Payment[] = [
   {
@@ -232,6 +233,9 @@ export function PostsTable() {
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+        <Button className="ml-2">
+          <Link href="/admin/posts/new">Create</Link>
+        </Button>
       </div>
       <div className="overflow-hidden rounded-md border">
         <Table>

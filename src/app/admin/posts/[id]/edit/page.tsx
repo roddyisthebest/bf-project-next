@@ -1,5 +1,5 @@
 // app/admin/posts/[id]/edit/page.tsx
-import { PostForm } from "../../components/PostForm";
+import { PostForm } from "../../components/post-form";
 export default async function EditPostPage({
   params,
 }: {
