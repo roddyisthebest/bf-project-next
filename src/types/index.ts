@@ -1,4 +1,4 @@
-import { PostType } from "@/enums";
+import { ChapleType, PostType } from "@/enums";
 
 export interface PostBody {
   title: string;
@@ -13,3 +13,21 @@ export interface PostView extends PostBody {
   created_at: number;
   updated_at: number;
 }
+
+export interface ChapleView extends ChapleBody {
+  id: number;
+  created_by: number;
+  created_at: number;
+  updated_at: number;
+}
+
+export interface ChapleBody {
+  type: ChapleType | null;
+  link: string;
+  title: string;
+  verse: string;
+}
+
+export type PageProps = {
+  params: Promise<{ id: string }>;
+};

@@ -1,36 +1,36 @@
-// app/admin/posts/[id]/edit/page.tsx
-import { PageProps, PostBody, PostView } from "@/types";
-import { PostForm } from "../../components/post-form";
+// app/admin/chaples/[id]/edit/page.tsx
+import { ChapleBody, PageProps } from "@/types";
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
-export default async function EditPostPage({ params }: PageProps) {
+import { ChapleForm } from "../../components/chaple-form";
+export default async function EditChaplePage({ params }: PageProps) {
   const { id } = await params;
-  const postId = Number(id);
-  if (!Number.isFinite(postId)) notFound();
+  const chapleId = Number(id);
+  if (!Number.isFinite(chapleId)) notFound();
 
   const supabase = await createClient();
 
-  const { data: post, error } = await supabase
-    .from("posts")
+  const { data: chaple, error } = await supabase
+    .from("chaples")
     .select("*") // 필요한 컬럼만 골라서 select 해도 OK
-    .eq("id", postId)
+    .eq("id", chapleId)
     .single();
 
-  if (error || !post) {
+  if (error || !chaple) {
     notFound(); // 404 페이지로
   }
 
-  async function update(values: PostBody) {
+  async function update(values: ChapleBody) {
     "use server";
 
     const supabase = await createClient();
     const { data: inserted, error } = await supabase
-      .from("posts")
+      .from("chaples")
       .update({
         ...values,
         updated_at: new Date().toISOString(),
       })
-      .eq("id", postId)
+      .eq("id", chapleId)
       .select("id")
       .single();
 
@@ -38,11 +38,16 @@ export default async function EditPostPage({ params }: PageProps) {
       throw new Error(`posts insert 실패: ${error.message}`);
     }
 
-    const updatedPostId = inserted!.id as number;
+    const updatedChapleId = inserted!.id as number;
     // 성공적으로 생성된 후 리다이렉트 (예: 상세 페이지로)
-    return updatedPostId;
+    return updatedChapleId;
   }
   return (
-    <PostForm initialValues={post} onSubmit={update} submitText="Update Post" />
+    <ChapleForm
+      initialValues={chaple}
+      onSubmit={update}
+      submitText="Update Chaple"
+      chapleId={chapleId}
+    />
   );
 }

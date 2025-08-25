@@ -9,8 +9,12 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { PostType } from "@/enums";
 import type { PostView } from "@/types";
-import { Pencil, ImageIcon } from "lucide-react";
+import { Pencil, ImageIcon, Trash, Loader } from "lucide-react";
 import clsx from "clsx";
+import { Button } from "@/components/ui/button";
+import { createClient } from "@/lib/supabase/client";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const extractFirstImageUrl = (md: string): string | null => {
   const regex = /!\[[^\]]*\]\((?<url>[^)\s]+)(?:\s+"[^"]*")?\)/;
@@ -47,6 +51,39 @@ export function PostDetail({ post }: { post: PostView }) {
     [post.content]
   );
 
+  const [loading, setLoading] = React.useState(false);
+
+  const router = useRouter();
+
+  const handleDelete = async () => {
+    const isOkay = window.confirm(
+      "정말 삭제하시겠습니까? This action cannot be undone."
+    );
+
+    if (!isOkay) {
+      return;
+    }
+    setLoading(true);
+
+    try {
+      const supabase = createClient();
+      const { error } = await supabase.from("posts").delete().eq("id", post.id);
+      if (error) {
+        toast.error("삭제 중 오류가 발생했습니다: " + error.message);
+        return;
+      }
+      router.replace("/admin/posts");
+      toast.success("게시글이 삭제되었습니다.");
+    } catch (e) {
+      console.error(e);
+      toast.error(
+        "삭제 중 오류가 발생했습니다: " + (e instanceof Error ? e.message : e)
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <article
       className={clsx(
@@ -79,17 +116,37 @@ export function PostDetail({ post }: { post: PostView }) {
             {post.title}
           </h1>
         </div>
-        <Link
-          href={`/admin/posts/${post.id}/edit`}
-          className={clsx(
-            "group flex items-center gap-1 rounded-md border border-emerald-500/70 px-3 py-1 text-sm font-bold",
-            "text-emerald-100 bg-emerald-900/20 hover:bg-emerald-800/30 transition",
-            "shadow-[0_0_16px_rgba(16,185,129,0.15)] hover:shadow-[0_0_24px_rgba(16,185,129,0.25)]"
-          )}
-        >
-          <Pencil className="h-4 w-4" />
-          <span className="relative z-10">수정</span>
-        </Link>
+        <div className="flex items-center gap-x-2">
+          <Link
+            href={`/admin/posts/${post.id}/edit`}
+            className={clsx(
+              "group flex items-center gap-1 rounded-md border border-emerald-500/70 px-3 py-1 text-sm font-bold",
+              "text-emerald-100 bg-emerald-900/20 hover:bg-emerald-800/30 transition",
+              "shadow-[0_0_16px_rgba(16,185,129,0.15)] hover:shadow-[0_0_24px_rgba(16,185,129,0.25)]"
+            )}
+          >
+            <Pencil className="h-4 w-4" />
+            <span className="relative z-10">수정</span>
+          </Link>
+          <button
+            onClick={handleDelete}
+            className={clsx(
+              "group flex items-center gap-1 rounded-md border border-emerald-500/70 px-3 py-1 text-sm font-bold",
+              "text-emerald-100 bg-emerald-900/20 hover:bg-emerald-800/30 transition",
+              "shadow-[0_0_16px_rgba(16,185,129,0.15)] hover:shadow-[0_0_24px_rgba(16,185,129,0.25)]"
+            )}
+            disabled={loading}
+          >
+            {loading ? (
+              <Loader className="h-4 w-4 animate-spin" />
+            ) : (
+              <>
+                <Trash className="h-4 w-4" />
+                <span className="relative z-10">삭제</span>
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Meta */}
