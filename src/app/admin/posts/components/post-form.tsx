@@ -1,4 +1,4 @@
-// components/PostForm.tsx (핵심만 발췌)
+// components/PostForm.tsx
 "use client";
 
 import * as React from "react";
@@ -34,6 +34,7 @@ import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
+import clsx from "clsx";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
 
@@ -78,7 +79,6 @@ export function PostForm({
   const toolbarCommands: ICommand[] = useMemo(() => {
     const customImage = createImageUploadCommand(() => {});
     return [
-      // 1줄 툴바 예시 (원하면 더 넣으세요)
       commands.bold,
       commands.italic,
       commands.strikethrough,
@@ -91,7 +91,7 @@ export function PostForm({
       commands.orderedListCommand,
       commands.checkedListCommand,
       commands.table,
-      customImage, // ← 여기!
+      customImage,
     ];
   }, []);
 
@@ -113,7 +113,6 @@ export function PostForm({
       setLoading(true);
       const postId = await onSubmit(payload);
       router.replace(`/admin/posts/${postId}/detail`);
-
       toast.success("게시글이 저장되었습니다.");
     } catch (e) {
       toast.error(
@@ -135,115 +134,148 @@ export function PostForm({
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(handleSubmit)}
-        className="space-y-6 px-4"
-      >
-        <h1 className="text-2xl font-bold">{submitText}</h1>
-        <FormField
-          control={form.control}
-          name="title"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>제목</FormLabel>
-              <FormControl>
-                <Input placeholder="제목을 입력하세요" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      {/* CRT 느낌의 박스 */}
+      <div className="relative rounded-xl border border-emerald-700/40 bg-[#0b0f0a] p-4 shadow-[0_0_32px_rgba(16,185,129,0.15)]">
+        {/* subtle scanlines */}
+        <div className="pointer-events-none absolute inset-0 mix-blend-overlay opacity-20 animate-scanlines [background:repeating-linear-gradient(0deg,rgba(255,255,255,0.06),rgba(255,255,255,0.06)_1px,transparent_1px,transparent_3px)]" />
+        {/* inner glow */}
+        <div className="pointer-events-none absolute inset-0 rounded-xl [box-shadow:inset_0_0_28px_rgba(16,185,129,0.12)]" />
 
-        {/* Type */}
-        <FormField
-          control={form.control}
-          name="type"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>게시글 유형</FormLabel>
-              <FormControl>
-                <Select
-                  value={field.value ?? ""}
-                  onValueChange={(val) =>
-                    field.onChange(val as unknown as PostType)
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="유형을 선택하세요" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {enumOptions.map((opt) => (
-                      <SelectItem key={opt} value={opt}>
-                        {typeLabels?.[opt] ?? opt}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <form
+          onSubmit={form.handleSubmit(handleSubmit)}
+          className="relative z-10 space-y-6"
+        >
+          <h1 className="text-2xl font-black tracking-tight text-emerald-200 drop-shadow-[0_0_16px_rgba(16,185,129,0.28)] animate-glow">
+            {submitText}
+          </h1>
 
-        {/* Content with Upload Button */}
-        <FormField
-          control={form.control}
-          name="content"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="flex items-center justify-between">
-                <span>내용 (Markdown)</span>
-                {/* <span className="flex gap-2">
-                  <input
-                    ref={fileRef}
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={onChangeFile}
+          {/* Title */}
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-emerald-300">제목</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="제목을 입력하세요"
+                    {...field}
+                    className={clsx(
+                      "bg-emerald-950/30 border-emerald-800 text-emerald-50 placeholder:text-emerald-300/40",
+                      "focus-visible:ring-emerald-400 focus-visible:ring-offset-0"
+                    )}
                   />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={pickImage}
-                    disabled={uploading}
+                </FormControl>
+                <FormMessage className="text-emerald-300/80" />
+              </FormItem>
+            )}
+          />
+
+          {/* Type */}
+          <FormField
+            control={form.control}
+            name="type"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-emerald-300">게시글 유형</FormLabel>
+                <FormControl>
+                  <Select
+                    value={field.value ?? ""}
+                    onValueChange={(val) =>
+                      field.onChange(val as unknown as PostType)
+                    }
                   >
-                    {uploading ? "업로드 중..." : "이미지 업로드"}
-                  </Button>
-                </span> */}
-              </FormLabel>
+                    <SelectTrigger
+                      className={clsx(
+                        "bg-emerald-950/30 border-emerald-800 text-emerald-50",
+                        "focus:ring-emerald-400"
+                      )}
+                    >
+                      <SelectValue placeholder="유형을 선택하세요" />
+                    </SelectTrigger>
+                    <SelectContent
+                      className="border-emerald-800 bg-[#0b0f0a] text-emerald-50"
+                      position="popper"
+                      sideOffset={4}
+                    >
+                      {enumOptions.map((opt) => (
+                        <SelectItem
+                          key={opt}
+                          value={opt}
+                          className="focus:bg-emerald-900/50 data-[highlighted]:bg-emerald-900/60"
+                        >
+                          {typeLabels?.[opt] ?? opt}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage className="text-emerald-300/80" />
+              </FormItem>
+            )}
+          />
 
-              <FormControl>
-                <div data-color-mode="light" className="rounded-md border p-2">
-                  <MDEditor
-                    value={field.value}
-                    onChange={(v) => field.onChange(v ?? "")}
-                    preview="edit" // "live" / "preview" 가능
-                    height={380}
-                    commands={toolbarCommands} // ✅ 커스텀 툴바 주입
-                  />
-                </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          {/* Content */}
+          <FormField
+            control={form.control}
+            name="content"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="flex items-center justify-between text-emerald-300">
+                  <span>내용 (Markdown)</span>
+                </FormLabel>
+                <FormControl>
+                  <div
+                    data-color-mode="dark"
+                    className="rounded-md border border-emerald-800 bg-emerald-950/20 p-2"
+                  >
+                    <MDEditor
+                      value={field.value}
+                      onChange={(v) => field.onChange(v ?? "")}
+                      preview="edit"
+                      height={380}
+                      commands={toolbarCommands}
+                      className="bb-md-editor"
+                    />
+                  </div>
+                </FormControl>
+                <FormMessage className="text-emerald-300/80" />
+              </FormItem>
+            )}
+          />
 
-        {/* Actions */}
-        <div className="flex items-center gap-2">
-          <Button type="submit" disabled={loading}>
-            {loading ? <Loader /> : submitText}
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => form.reset()}
-            disabled={loading}
-          >
-            Reset
-          </Button>
-        </div>
-      </form>
+          {/* Actions */}
+          <div className="flex items-center gap-2">
+            <Button
+              type="submit"
+              disabled={loading}
+              className={clsx(
+                "relative bg-emerald-600 text-white hover:bg-emerald-500",
+                "shadow-[0_0_16px_rgba(16,185,129,0.25)] hover:shadow-[0_0_24px_rgba(16,185,129,0.35)]"
+              )}
+            >
+              {loading ? (
+                <span className="inline-flex items-center gap-2">
+                  <Loader className="h-4 w-4 animate-spin" />
+                  Saving…
+                </span>
+              ) : (
+                submitText
+              )}
+            </Button>
+
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => form.reset()}
+              disabled={loading}
+              className="border-emerald-700/60 bg-transparent text-emerald-200 hover:bg-emerald-900/30"
+            >
+              Reset
+            </Button>
+          </div>
+        </form>
+      </div>
     </Form>
   );
 }

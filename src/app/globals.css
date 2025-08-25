@@ -491,3 +491,26 @@
     animation: none !important;
   }
 }
+
+/* MDEditor (uiw) emerald tone) */
+.bb-md-editor .w-md-editor {
+  background: transparent !important;
+  border: none !important;
+  color: #d1fae5; /* emerald-100 */
+}
+.bb-md-editor .w-md-editor-toolbar {
+  background: rgba(6, 78, 59, 0.15) !important; /* emerald-800/15 */
+  border-bottom: 1px solid rgba(16, 185, 129, 0.25) !important;
+  backdrop-filter: blur(2px);
+}
+.bb-md-editor .w-md-editor-toolbar li button {
+  color: rgba(209, 250, 229, 0.9) !important;
+}
+.bb-md-editor .w-md-editor-text-pre > code,
+.bb-md-editor .w-md-editor-text-input,
+.bb-md-editor .w-md-editor-text {
+  color: #ecfdf5 !important; /* emerald-50 */
+}
+.bb-md-editor .w-md-editor-preview {
+  background: rgba(6, 95, 70, 0.08) !important; /* emerald-700/8 */
+}
