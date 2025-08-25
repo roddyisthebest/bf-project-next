@@ -21,7 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
-import { PostView } from "@/types";
+import { ChapleView, PostView } from "@/types";
 
 type SortOrder = "newest" | "oldest";
 
@@ -34,7 +34,7 @@ const formatDate = (v: string | number | Date) =>
     minute: "2-digit",
   }).format(new Date(v));
 
-export function PostsTable({
+export function ChaplesTable({
   initialRows,
   total,
   initialQ,
@@ -42,7 +42,7 @@ export function PostsTable({
   page,
   pageSize,
 }: {
-  initialRows: PostView[];
+  initialRows: ChapleView[];
   total: number;
   initialQ: string;
   initialSort: SortOrder;
@@ -136,7 +136,7 @@ export function PostsTable({
         </DropdownMenu>
 
         <Button asChild className="ml-2">
-          <Link href="/admin/posts/new">Create</Link>
+          <Link href="/admin/chaples/new">Create</Link>
         </Button>
       </div>
 
@@ -159,19 +159,7 @@ export function PostsTable({
                 <TableRow key={r.id}>
                   <TableCell>{r.id}</TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-3">
-                      {r.thumbnail ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={r.thumbnail}
-                          alt=""
-                          className="h-9 w-9 rounded border object-cover"
-                        />
-                      ) : (
-                        <div className="h-9 w-9 rounded border bg-muted/40" />
-                      )}
-                      <span className="font-medium">{r.title}</span>
-                    </div>
+                    <span className="font-medium">{r.title}</span>
                   </TableCell>
                   <TableCell>
                     <span className="uppercase text-xs tracking-wide">
@@ -186,7 +174,7 @@ export function PostsTable({
                   </TableCell>
                   <TableCell>
                     <Button asChild variant="outline" size="sm">
-                      <Link href={`/admin/posts/${r.id}/detail`}>보기</Link>
+                      <Link href={`/admin/chaples/${r.id}/edit`}>보기</Link>
                     </Button>
                   </TableCell>
                 </TableRow>

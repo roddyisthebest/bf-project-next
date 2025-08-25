@@ -1,6 +1,7 @@
+import { ChaplesTable } from "@/components/custom/chaples-table";
 import { PostsTable } from "@/components/custom/posts-table";
 import { createClient } from "@/lib/supabase/server";
-import { PostView } from "@/types";
+import { ChapleView, PostView } from "@/types";
 
 type SearchParams = {
   q?: string;
@@ -9,7 +10,7 @@ type SearchParams = {
   pageSize?: string; // 10/20/30...
 };
 
-export default async function PostsPage({
+export default async function ChaplesPage({
   searchParams,
 }: {
   searchParams?: SearchParams;
@@ -29,11 +30,9 @@ export default async function PostsPage({
 
   const supabase = await createClient();
 
-  let query = supabase
-    .from("posts")
-    .select("id,title,type,thumbnail,created_at,updated_at", {
-      count: "exact",
-    });
+  let query = supabase.from("chaples").select("*", {
+    count: "exact",
+  });
 
   if (q) {
     query = query.or(`title.ilike.%${q}%,type.ilike.%${q}%`);
@@ -57,14 +56,14 @@ export default async function PostsPage({
     );
   }
 
-  const rows = (data ?? []) as PostView[];
+  const rows = (data ?? []) as ChapleView[];
   const total = count ?? 0;
 
   return (
     <div className="px-4 pb-4">
-      <h1 className="text-2xl font-semibold">Posts</h1>
+      <h1 className="text-2xl font-semibold">Chaples</h1>
       <div className="flex flex-1 w-full">
-        <PostsTable
+        <ChaplesTable
           initialRows={rows}
           total={total}
           initialQ={q}
