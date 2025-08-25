@@ -1,19 +1,6 @@
 "use client";
 
 import {
-  Calendar,
-  Database,
-  Home,
-  Inbox,
-  NotebookPen,
-  PodcastIcon,
-  Search,
-  Settings,
-  Type,
-  User,
-} from "lucide-react";
-
-import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
@@ -26,30 +13,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "/admin",
-    icon: Home,
-  },
-  {
-    title: "Users",
-    url: "/admin/users",
-    icon: User,
-  },
-  {
-    title: "Stereos",
-    url: "/admin/stereos",
-    icon: Database,
-  },
-  {
-    title: "Posts",
-    url: "/admin/posts",
-    icon: NotebookPen,
-  },
-];
+import { adminRoutes } from "../consts";
 
 export function AdminSidebar() {
   const pathname = usePathname();
@@ -60,11 +24,11 @@ export function AdminSidebar() {
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => {
-                const isActive = pathname === item.url;
+              {adminRoutes.map((route) => {
+                const isActive = pathname === route.url;
 
                 return (
-                  <SidebarMenuItem key={item.title}>
+                  <SidebarMenuItem key={route.title}>
                     <SidebarMenuButton
                       asChild
                       className={cn(
@@ -75,10 +39,10 @@ export function AdminSidebar() {
                       )}
                     >
                       <Link
-                        href={item.url}
+                        href={route.url}
                         aria-current={isActive ? "page" : undefined}
                       >
-                        <item.icon
+                        <route.icon
                           className={cn(
                             "h-4 w-4 shrink-0 transition",
                             isActive
@@ -92,7 +56,7 @@ export function AdminSidebar() {
                             isActive ? "font-bold" : "font-normal"
                           )}
                         >
-                          {item.title}
+                          {route.title}
                         </span>
                       </Link>
                     </SidebarMenuButton>
