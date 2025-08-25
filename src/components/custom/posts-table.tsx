@@ -1,31 +1,9 @@
 "use client";
 
 import * as React from "react";
-import {
-  ColumnDef,
-  ColumnFiltersState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  SortingState,
-  useReactTable,
-  VisibilityState,
-} from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
-
+import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -35,251 +13,187 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import Link from "next/link";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
+import { PostView } from "@/types";
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@example.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@example.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@example.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@example.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@example.com",
-  },
-];
+type SortOrder = "newest" | "oldest";
 
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
+const formatDate = (v: string | number | Date) =>
+  new Intl.DateTimeFormat("ko-KR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(v));
 
-export const columns: ColumnDef<Payment>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
-    ),
-  },
-  {
-    accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <ArrowUpDown />
-        </Button>
-      );
-    },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
-  },
-  {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
+export function PostsTable({
+  initialRows,
+  total,
+  initialQ,
+  initialSort,
+  page,
+  pageSize,
+}: {
+  initialRows: PostView[];
+  total: number;
+  initialQ: string;
+  initialSort: SortOrder;
+  page: number; // 1-based
+  pageSize: number;
+}) {
+  const rows = initialRows;
+  const [q, setQ] = React.useState(initialQ);
+  const [sort, setSort] = React.useState<SortOrder>(initialSort);
 
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
+  React.useEffect(() => {
+    setQ(initialQ);
+  }, [initialQ]);
 
-      return <div className="text-right font-medium">{formatted}</div>;
-    },
-  },
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const payment = row.original;
+  React.useEffect(() => {
+    setSort(initialSort);
+  }, [initialSort]);
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
-  },
-];
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-export function PostsTable() {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+  const pageCount = Math.max(1, Math.ceil(total / pageSize));
 
-  const table = useReactTable({
-    data,
-    columns,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      sorting,
-      columnFilters,
-      columnVisibility,
-      rowSelection,
-    },
-  });
+  const pushWithParams = (
+    next: Partial<{
+      q: string;
+      sort: SortOrder;
+      page: number;
+      pageSize: number;
+    }>
+  ) => {
+    const params = new URLSearchParams(searchParams?.toString() ?? "");
+    if (next.q !== undefined) params.set("q", next.q);
+    if (next.sort !== undefined) params.set("sort", next.sort);
+    if (next.page !== undefined) params.set("page", String(next.page));
+    if (next.pageSize !== undefined)
+      params.set("pageSize", String(next.pageSize));
+    // 보장: 비어있는 q 제거
+    if (!params.get("q")) params.delete("q");
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  const onSearch = () => {
+    // 검색 시 1페이지로
+    pushWithParams({ q, sort, page: 1, pageSize });
+  };
+
+  const changeSort = (s: SortOrder) => {
+    setSort(s);
+    pushWithParams({ q, sort: s, page: 1, pageSize });
+  };
+
+  const changePageSize = (size: number) => {
+    pushWithParams({ q, sort, page: 1, pageSize: size });
+  };
+
+  const goPrev = () =>
+    page > 1 && pushWithParams({ q, sort, page: page - 1, pageSize });
+  const goNext = () =>
+    page < pageCount && pushWithParams({ q, sort, page: page + 1, pageSize });
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      {/* Toolbar */}
+      <div className="flex items-center gap-2 py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-          }
+          placeholder="제목/유형 검색… (엔터)"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && onSearch()}
           className="max-w-sm"
         />
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown />
+              {sort === "newest" ? "최신순" : "오래된순"}{" "}
+              <ChevronDown className="ml-1 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
+            <DropdownMenuLabel>정렬</DropdownMenuLabel>
+            <DropdownMenuItem onClick={() => changeSort("newest")}>
+              최신순
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => changeSort("oldest")}>
+              오래된순
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button className="ml-2">
+
+        <Button asChild className="ml-2">
           <Link href="/admin/posts/new">Create</Link>
         </Button>
       </div>
+
+      {/* Table */}
       <div className="overflow-hidden rounded-md border">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
+            <TableRow>
+              <TableHead className="w-[64px]">#</TableHead>
+              <TableHead>제목</TableHead>
+              <TableHead className="w-[140px]">유형</TableHead>
+              <TableHead className="w-[180px]">작성일</TableHead>
+              <TableHead className="w-[180px]">수정일</TableHead>
+              <TableHead className="w-[120px]">열람</TableHead>
+            </TableRow>
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
+            {rows.length ? (
+              rows.map((r) => (
+                <TableRow key={r.id}>
+                  <TableCell>{r.id}</TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-3">
+                      {r.thumbnail ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={r.thumbnail}
+                          alt=""
+                          className="h-9 w-9 rounded border object-cover"
+                        />
+                      ) : (
+                        <div className="h-9 w-9 rounded border bg-muted/40" />
                       )}
-                    </TableCell>
-                  ))}
+                      <span className="font-medium">{r.title}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <span className="uppercase text-xs tracking-wide">
+                      {r.type ?? "-"}
+                    </span>
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {formatDate(r.created_at)}
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {formatDate(r.updated_at)}
+                  </TableCell>
+                  <TableCell>
+                    <Button asChild variant="outline" size="sm">
+                      <Link href={`/admin/posts/${r.id}/detail`}>보기</Link>
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                <TableCell colSpan={6} className="h-24 text-center">
                   No results.
                 </TableCell>
               </TableRow>
@@ -287,25 +201,39 @@ export function PostsTable() {
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="text-muted-foreground flex-1 text-sm">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+
+      {/* Footer: pagination */}
+      <div className="flex items-center justify-between gap-2 py-4">
+        <div className="text-sm text-muted-foreground">
+          Page {page} / {pageCount} · Total {total.toLocaleString()}
         </div>
-        <div className="space-x-2">
+        <div className="flex items-center gap-2">
+          <span className="text-sm">Rows:</span>
+          <select
+            className="h-9 rounded-md border bg-background px-2 text-sm"
+            value={pageSize}
+            onChange={(e) => changePageSize(Number(e.target.value))}
+          >
+            {[10, 20, 30, 50, 100].map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+
           <Button
             variant="outline"
             size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
+            onClick={goPrev}
+            disabled={page <= 1}
           >
             Previous
           </Button>
           <Button
             variant="outline"
             size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
+            onClick={goNext}
+            disabled={page >= pageCount}
           >
             Next
           </Button>

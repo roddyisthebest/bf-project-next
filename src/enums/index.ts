@@ -1,7 +1,7 @@
 export enum PostType {
   Talk = "talk",
   Gallery = "gallery",
-  Testimonial = "testimonial",
+  Testimony = "testimony",
 }
 
 export enum ChapleType {

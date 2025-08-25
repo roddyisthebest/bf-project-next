@@ -21,7 +21,6 @@ export default function NewPostPage() {
       .select("id")
       .single();
 
-    console.log(error, inserted);
     if (error) {
       throw new Error(`posts insert 실패: ${error.message}`);
     }

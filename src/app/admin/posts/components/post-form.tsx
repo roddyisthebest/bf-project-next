@@ -27,7 +27,7 @@ import {
 
 import { defaultPostBody } from "@/consts";
 import { PostType } from "@/enums";
-import { PostBody } from "@/types";
+import { PostBody, PostView } from "@/types";
 import { createImageUploadCommand } from "./create-image-upload-command";
 import { commands, ICommand } from "@uiw/react-md-editor";
 import { useEffect, useMemo, useState } from "react";
@@ -135,7 +135,7 @@ export function PostForm({
   return (
     <Form {...form}>
       {/* CRT 느낌의 박스 */}
-      <div className="relative rounded-xl border border-emerald-700/40 bg-[#0b0f0a] p-4 shadow-[0_0_32px_rgba(16,185,129,0.15)]">
+      <div className="relative  border border-emerald-700/40 bg-[#0b0f0a] p-4 shadow-[0_0_32px_rgba(16,185,129,0.15)]">
         {/* subtle scanlines */}
         <div className="pointer-events-none absolute inset-0 mix-blend-overlay opacity-20 animate-scanlines [background:repeating-linear-gradient(0deg,rgba(255,255,255,0.06),rgba(255,255,255,0.06)_1px,transparent_1px,transparent_3px)]" />
         {/* inner glow */}
