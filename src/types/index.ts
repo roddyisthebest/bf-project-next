@@ -31,3 +31,7 @@ export interface ChapleBody {
 export type PageProps = {
   params: Promise<{ id: string }>;
 };
+
+export type PostTypePageProps = {
+  params: Promise<{ type: PostType }>;
+};

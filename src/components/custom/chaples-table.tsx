@@ -107,7 +107,7 @@ export function ChaplesTable({
   const getDetailPath = (chaple: ChapleView) =>
     isAdmin
       ? `/admin/chaples/${chaple.id}/edit`
-      : `/chaples/${chaple.id}/detail?type=${chaple.type}`;
+      : `/chaples/${chaple.type}/${chaple.id}/detail`;
 
   return (
     <div className="w-full">

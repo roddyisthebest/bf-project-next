@@ -1,4 +1,5 @@
 import { ChaplesTable } from "@/components/custom/chaples-table";
+import { ChapleType } from "@/enums";
 import { createClient } from "@/lib/supabase/server";
 import { ChapleView } from "@/types";
 
@@ -9,20 +10,25 @@ type SearchParams = {
   pageSize?: string;
 };
 
-export default async function FridayPage({
+export default async function ChaplePage({
   searchParams,
+  params,
 }: {
-  searchParams?: SearchParams;
+  searchParams?: Promise<SearchParams>;
+  params: Promise<{ type: ChapleType }>;
 }) {
-  const title = (searchParams?.title ?? "").trim();
-  const sort = (searchParams?.sort === "oldest" ? "oldest" : "newest") as
-    | "newest"
-    | "oldest";
+  const { type } = await params;
+  const resolvedSearchParams = await searchParams;
 
-  const page = Math.max(1, Number(searchParams?.page ?? "1")); // 1-based
+  const title = (resolvedSearchParams?.title ?? "").trim();
+  const sort = (
+    resolvedSearchParams?.sort === "oldest" ? "oldest" : "newest"
+  ) as "newest" | "oldest";
+
+  const page = Math.max(1, Number(resolvedSearchParams?.page ?? "1")); // 1-based
   const pageSize = Math.min(
     100,
-    Math.max(1, Number(searchParams?.pageSize ?? "10"))
+    Math.max(1, Number(resolvedSearchParams?.pageSize ?? "10"))
   );
 
   const from = (page - 1) * pageSize;
@@ -35,7 +41,7 @@ export default async function FridayPage({
     .select("*", {
       count: "exact",
     })
-    .or(`type.eq.friday`);
+    .or(`type.eq.${type}`);
 
   if (title) {
     query = query.or(`title.ilike.%${title}%`);

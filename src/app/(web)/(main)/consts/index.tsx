@@ -58,7 +58,7 @@ export const routes: Route[] = [
     subRoutes: [
       {
         title: "주일예배",
-        href: "/chaples",
+        href: "/chaples/sunday",
       },
       {
         title: "수요예배",
@@ -130,7 +130,7 @@ export const routes: Route[] = [
     subRoutes: [
       {
         title: "소통방",
-        href: "/boards",
+        href: "/boards/talk",
       },
       {
         title: "사진/갤러리",
