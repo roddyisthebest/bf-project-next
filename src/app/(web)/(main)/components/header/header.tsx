@@ -3,6 +3,7 @@
 import { LogoutButton } from "@/components/custom/logout-button";
 import { NavigationMenuDemo } from "./subs/navigation-menu";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Menu, X, User } from "lucide-react";
 import {
@@ -22,11 +23,39 @@ import { MobileNavigationMenu } from "./subs/mobile-navigation-menu";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { User as UserType } from "@supabase/supabase-js";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Header() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [user, setUser] = useState<UserType | null>(null);
   const [profile, setProfile] = useState<any>(null);
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("/auth/signout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        console.error("Logout failed with status:", response.status);
+        return;
+      }
+
+      if (pathname.startsWith("/admin")) {
+        router.push("/");
+      } else {
+        window.location.reload();
+      }
+    } catch (err) {
+      console.error("Logout network error:", err);
+      window.location.reload();
+    }
+  };
 
   console.log(user, "user");
   console.log(profile, "profile");
@@ -63,15 +92,15 @@ export default function Header() {
     >
       <div className="h-20 flex items-center justify-between px-4">
         <div className="flex items-center gap-4">
-          {/* 타이틀에 살짝 BB 요소(엣지 라인 + 라운드) */}
-          <div className="flex items-center gap-2">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-emerald-200 bg-white text-lg font-bold leading-none">
-              B
-            </span>
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-emerald-200 bg-white text-lg font-bold leading-none">
-              F
-            </span>
-          </div>
+          {/* 로고 */}
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo_transparent.png"
+              alt="Logo"
+              width={80}
+              height={80}
+            />
+          </Link>
 
           <NavigationMenuDemo />
         </div>
@@ -95,8 +124,8 @@ export default function Header() {
                   </div>
                   <div className="text-xs text-gray-500">{user.email}</div>
                 </div>
-                <DropdownMenuItem asChild>
-                  <LogoutButton />
+                <DropdownMenuItem onClick={handleLogout}>
+                  로그아웃
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -124,14 +153,9 @@ export default function Header() {
                   isScrolled ? "border-b border-emerald-100" : ""
                 }`}
               >
-                <div className="flex items-center gap-2">
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-emerald-200 bg-white text-lg font-bold leading-none">
-                    B
-                  </span>
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-emerald-200 bg-white text-lg font-bold leading-none">
-                    F
-                  </span>
-                </div>
+                <Link href="/" className="flex items-center">
+                  <Image src="/logo.png" alt="Logo" width={80} height={80} />
+                </Link>
 
                 <DialogClose asChild>
                   <Button variant="ghost" className="">
@@ -141,9 +165,19 @@ export default function Header() {
               </DialogTitle>
               <div className="px-4 mt-4">
                 {user ? (
-                  <div className="space-y-2">
-                    <div className="text-center text-sm text-emerald-700 py-1 truncate">
-                      {profile?.name || user.email}님
+                  <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+                        <User className="h-5 w-5 text-emerald-600" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-medium text-gray-900 truncate">
+                          {user?.user_metadata.name || user.email}
+                        </div>
+                        <div className="text-xs text-gray-500 truncate">
+                          {user.email}
+                        </div>
+                      </div>
                     </div>
                     <LogoutButton />
                   </div>
