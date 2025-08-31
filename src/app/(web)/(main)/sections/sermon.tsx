@@ -9,14 +9,13 @@ import { Book, Calendar } from "lucide-react";
 export default async function SermonSection() {
   const supabase = await createClient();
 
-  const { data: recentChaple, error } = await supabase
+  const { data: chaples, error } = await supabase
     .from("chaples")
     .select("*")
     .order("created_at", { ascending: false })
-    .limit(1)
-    .single<ChapleView>();
+    .limit(1);
 
-  if (error) {
+  if (error || !chaples || chaples.length === 0) {
     return (
       <section className="p-5 flex flex-col gap-y-5 min-w-0">
         <div className="flex flex-col gap-y-1">
@@ -24,15 +23,19 @@ export default async function SermonSection() {
           <p className="text-neutral text-lg font-medium">주일예배</p>
         </div>
 
-        <div className="flex min-h-64 items-center justify-center rounded-lg border border-red-300 bg-red-50">
-          <p className="text-red-600 font-semibold">
-            ⚠️ 최근 설교 영상을 불러오지 못했습니다.
+        <div className="flex min-h-64 items-center justify-center rounded-lg border flex-col border-gray-200 bg-gray-50">
+          <p className="text-gray-600 font-medium">
+            아직 업로드된 설교 영상이 없습니다.
           </p>
-          {error?.message && <p>{error.message}</p>}
+          <p className="text-sm text-gray-500 mt-1">
+            공지사항을 확인해 주세요.
+          </p>
         </div>
       </section>
     );
   }
+
+  const recentChaple = chaples[0] as ChapleView;
 
   return (
     <section className="p-5 flex flex-col gap-y-5 min-w-0">
