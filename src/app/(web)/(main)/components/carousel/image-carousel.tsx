@@ -1,8 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { PostView } from "@/types";
-import { HeroCarouselClient } from "./hero-carousel-client";
+import { ImageCarouselClient } from "./image-carousel-client";
 
-export default async function HeroCarousel() {
+export default async function ImageCarousel() {
   const supabase = await createClient();
 
   const { data: imagePosts, error } = await supabase
@@ -49,5 +49,5 @@ export default async function HeroCarousel() {
     );
   }
 
-  return <HeroCarouselClient posts={imagePosts as PostView[]} />;
+  return <ImageCarouselClient posts={imagePosts as PostView[]} />;
 }

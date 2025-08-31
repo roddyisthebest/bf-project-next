@@ -1,5 +1,5 @@
 import Header from "@/app/(web)/(main)/components/header/header";
-import HeroCarousel from "@/app/(web)/(main)/components/hero-carousel";
+import ImageCarousel from "@/app/(web)/(main)/components/carousel/image-carousel";
 
 export default async function MainLayout({
   children,
@@ -12,7 +12,7 @@ export default async function MainLayout({
       <div className="pointer-events-none absolute inset-0 [background:repeating-linear-gradient(0deg,rgba(16,185,129,0.035),rgba(16,185,129,0.035)_1px,transparent_1px,transparent_24px)] opacity-40" />
 
       <Header />
-      <HeroCarousel />
+      <ImageCarousel />
       <main className="relative z-10 px-36 max-xl:px-6  max-md:px-4 ">
         {children}
       </main>

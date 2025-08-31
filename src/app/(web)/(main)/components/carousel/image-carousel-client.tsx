@@ -1,24 +1,21 @@
 "use client";
 
 import { PostView } from "@/types";
-import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-  type CarouselApi,
 } from "@/components/ui/carousel";
 import Link from "next/link";
 import Autoplay from "embla-carousel-autoplay";
 
-interface HeroCarouselClientProps {
+interface ImageCarouselClientProps {
   posts: PostView[];
 }
 
-export function HeroCarouselClient({ posts }: HeroCarouselClientProps) {
+export function ImageCarouselClient({ posts }: ImageCarouselClientProps) {
   if (posts.length === 0) {
     return (
       <div className="h-64 flex items-center justify-center bg-gray-50 border-y border-gray-200">
@@ -62,8 +59,12 @@ export function HeroCarouselClient({ posts }: HeroCarouselClientProps) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="left-4" />
-      <CarouselNext className="right-4" />
+      {posts.length > 1 && (
+        <>
+          <CarouselPrevious className="left-4" />
+          <CarouselNext className="right-4" />
+        </>
+      )}
     </Carousel>
   );
 }
