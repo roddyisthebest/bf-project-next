@@ -1,9 +1,11 @@
+import { ComingSoon } from "@/components/ui/coming-soon";
+
 export default function WednesdayPage() {
   return (
-    <div className="p-6">
-      <div className="bg-neutral-100 h-96 flex items-center justify-center">
-        <h1>준비중입니다...</h1>
-      </div>
-    </div>
+    <ComingSoon 
+      title="수요 채플 준비 중"
+      description="수요일 저녁 채플 예배와 말씨 나눔의 시간을 준비하고 있습니다."
+      icon="clock"
+    />
   );
 }
