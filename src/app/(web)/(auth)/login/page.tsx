@@ -3,6 +3,7 @@ import EmailForm from "./components/email-form";
 import { GoogleButton } from "./components/google-button";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function LoginPage() {
   return (
@@ -72,7 +73,9 @@ export default function LoginPage() {
               </div>
             </div>
             
-            <GoogleButton />
+            <Suspense fallback={<div className="h-13 bg-gray-100 rounded-lg animate-pulse" />}>
+              <GoogleButton />
+            </Suspense>
           </div>
           
           {/* 하단 장식 */}

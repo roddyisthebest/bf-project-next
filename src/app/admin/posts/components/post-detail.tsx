@@ -16,9 +16,9 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 const extractFirstImageUrl = (md: string): string | null => {
-  const regex = /!\[[^\]]*\]\((?<url>[^)\s]+)(?:\s+"[^"]*")?\)/;
+  const regex = /!\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)/;
   const match = md.match(regex);
-  return match?.groups?.url ?? null;
+  return match?.[1] ?? null;
 };
 
 const formatDateTime = (v: string | number | Date | null | undefined) => {
@@ -191,8 +191,9 @@ export function PostDetail({ post }: { post: PostView }) {
                 />
               </div>
             ),
-            code: ({ inline, children, ...rest }) =>
-              inline ? (
+            code: (props: React.HTMLAttributes<HTMLElement> & { inline?: boolean }) => {
+              const { inline, children, ...rest } = props;
+              return inline ? (
                 <code
                   {...rest}
                   className="rounded bg-emerald-900/40 px-1 py-0.5 text-emerald-100"
@@ -206,7 +207,8 @@ export function PostDetail({ post }: { post: PostView }) {
                 >
                   {children}
                 </code>
-              ),
+              );
+            },
             blockquote: (props) => (
               <blockquote
                 {...props}
