@@ -24,13 +24,14 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { User as UserType } from "@supabase/supabase-js";
 import { useRouter, usePathname } from "next/navigation";
+import { UserRole } from "@/enums";
 
 export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [user, setUser] = useState<UserType | null>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<{ role: UserRole } | null>(null);
 
   const handleLogout = async () => {
     try {
@@ -74,6 +75,16 @@ export default function Header() {
       } = await supabase.auth.getUser();
 
       setUser(user);
+
+      if (user) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", user.id)
+          .single();
+        
+        setProfile(profile);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -86,7 +97,7 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 bg-gradient-to-b from-brand-50/60 to-white backdrop-blur z-50 transition-all duration-200 ${
+      className={`sticky top-0  bg-gradient-to-b from-brand-50/60 to-white backdrop-blur z-50 transition-all duration-200 ${
         isScrolled ? "border-b border-brand-100" : ""
       }`}
     >
@@ -120,11 +131,29 @@ export default function Header() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <div className="px-3 py-2 text-sm border-b">
-                  <div className="font-medium text-gray-900">
-                    {user?.user_metadata.name || user.email}
+                  <div className="flex items-center gap-2">
+                    <div className="font-medium text-gray-900">
+                      {user?.user_metadata.name || user.email}
+                    </div>
+                    {profile?.role && (
+                      <span className={`text-xs font-medium px-1.5 py-0.5 rounded text-center ${
+                        profile.role === UserRole.Admin 
+                          ? 'bg-red-100 text-red-700' 
+                          : 'bg-blue-100 text-blue-700'
+                      }`}>
+                        {profile.role === UserRole.Admin ? '관리자' : '사용자'}
+                      </span>
+                    )}
                   </div>
                   <div className="text-xs text-gray-600">{user.email}</div>
                 </div>
+                {profile?.role === UserRole.Admin && (
+                  <DropdownMenuItem asChild>
+                    <Link href="/admin" className="cursor-pointer">
+                      관리자 페이지
+                    </Link>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuItem onClick={handleLogout}>
                   로그아웃
                 </DropdownMenuItem>
@@ -172,25 +201,48 @@ export default function Header() {
                         <User className="h-5 w-5 text-brand-600" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="font-medium text-gray-900 truncate">
-                          {user?.user_metadata.name || user.email}
+                        <div className="flex items-center gap-2">
+                          <div className="font-medium text-gray-900 truncate">
+                            {user?.user_metadata.name || user.email}
+                          </div>
+                          {profile?.role && (
+                            <span className={`text-xs font-medium px-1.5 py-0.5 rounded text-center ${
+                              profile.role === UserRole.Admin 
+                                ? 'bg-red-100 text-red-700' 
+                                : 'bg-blue-100 text-blue-700'
+                            }`}>
+                              {profile.role === UserRole.Admin ? '관리자' : '사용자'}
+                            </span>
+                          )}
                         </div>
                         <div className="text-xs text-gray-600 truncate">
                           {user.email}
                         </div>
                       </div>
                     </div>
+                    {profile?.role === UserRole.Admin && (
+                      <Link href="/admin" className="block mb-3">
+                        <Button 
+                          variant="outline" 
+                          className="w-full border-red-200 text-red-700 hover:bg-red-50 rounded-xl"
+                        >
+                          관리자 페이지
+                        </Button>
+                      </Link>
+                    )}
                     <LogoutButton />
                   </div>
                 ) : (
-                  <Link href="/login">
-                    <Button
-                      variant="outline"
-                      className="border-brand-100 text-brand-600 hover:bg-brand-50 rounded-xl w-full"
-                    >
-                      로그인
-                    </Button>
-                  </Link>
+                  <DialogClose asChild>
+                    <Link href="/login">
+                      <Button
+                        variant="outline"
+                        className="border-brand-100 text-brand-600 hover:bg-brand-50 rounded-xl w-full"
+                      >
+                        로그인
+                      </Button>
+                    </Link>
+                  </DialogClose>
                 )}
               </div>
               <MobileNavigationMenu />
@@ -198,8 +250,8 @@ export default function Header() {
           </DialogContent>
         </Dialog>
       </div>
-      {/* 하단 브랜드 라인 글로우 */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-brand-600/60 to-transparent" />
+      {/* 하단 라인 */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-600/60 to-transparent" />
     </header>
   );
 }

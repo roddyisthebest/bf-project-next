@@ -8,7 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Link from "next/link";
+
 import Autoplay from "embla-carousel-autoplay";
 
 interface ImageCarouselClientProps {
@@ -43,19 +43,17 @@ export function ImageCarouselClient({ posts }: ImageCarouselClientProps) {
       <CarouselContent>
         {posts.map((post) => (
           <CarouselItem key={post.id}>
-            <Link href={`/boards/${post.type}/${post.id}/detail`} className="block">
-              <div className="relative h-64 overflow-hidden bg-gray-900 cursor-pointer">
-                {/* 배경 이미지 */}
-                {post.thumbnail && (
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-300 hover:scale-105"
-                    style={{
-                      backgroundImage: `url(${post.thumbnail})`,
-                    }}
-                  />
-                )}
-              </div>
-            </Link>
+            <div className="relative h-64 overflow-hidden bg-gray-900">
+              {/* 배경 이미지 */}
+              {post.thumbnail && (
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url(${post.thumbnail})`,
+                  }}
+                />
+              )}
+            </div>
           </CarouselItem>
         ))}
       </CarouselContent>

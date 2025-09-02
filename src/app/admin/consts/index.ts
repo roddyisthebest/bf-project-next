@@ -1,8 +1,13 @@
-import { Church, Home, NotebookPen } from "lucide-react";
+import { Church, Home, NotebookPen, ArrowLeft } from "lucide-react";
 
 export const adminRoutes = [
   {
-    title: "Home",
+    title: "메인 사이트로",
+    url: "/",
+    icon: ArrowLeft,
+  },
+  {
+    title: "Admin Home",
     url: "/admin",
     icon: Home,
   },

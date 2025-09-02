@@ -285,8 +285,9 @@ export function StereosTable() {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="text-muted-foreground flex-1 text-sm">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+          <span className="max-sm:hidden">{table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {table.getFilteredRowModel().rows.length} row(s) selected.</span>
+          <span className="sm:hidden">{table.getFilteredSelectedRowModel().rows.length}/{table.getFilteredRowModel().rows.length}</span>
         </div>
         <div className="space-x-2">
           <Button
@@ -295,7 +296,8 @@ export function StereosTable() {
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Previous
+            <span className="max-sm:hidden">Previous</span>
+            <span className="sm:hidden">Prev</span>
           </Button>
           <Button
             variant="outline"
@@ -303,7 +305,8 @@ export function StereosTable() {
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Next
+            <span className="max-sm:hidden">Next</span>
+            <span className="sm:hidden">Next</span>
           </Button>
         </div>
       </div>

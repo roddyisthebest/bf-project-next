@@ -1,3 +1,4 @@
+import { UserRole } from "@/enums";
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
@@ -54,7 +55,7 @@ export async function updateSession(request: NextRequest) {
       .eq("id", user?.id)
       .single();
 
-    if (error || !profile || profile.role !== "admin") {
+    if (error || !profile || profile.role !== UserRole.Admin) {
       const url = request.nextUrl.clone();
       url.pathname = "/auth/403";
       const res = NextResponse.redirect(url);

@@ -183,21 +183,24 @@ export function GalleryGrid({
       {/* Footer: pagination */}
       <div className="flex items-center justify-between gap-2 py-4">
         <div className="text-sm text-muted-foreground">
-          Page {page} / {pageCount} · Total {total.toLocaleString()}
+          <span className="max-sm:hidden">Page {page} / {pageCount} · Total {total.toLocaleString()}</span>
+          <span className="sm:hidden">{page}/{pageCount} · {total.toLocaleString()}</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-sm">Rows:</span>
-          <select
-            className="h-9 rounded-md border bg-background px-2 text-sm"
-            value={pageSize}
-            onChange={(e) => changePageSize(Number(e.target.value))}
-          >
-            {[12, 24, 36, 48].map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
+          <div className="flex items-center gap-2 max-sm:hidden">
+            <span className="text-sm">Rows:</span>
+            <select
+              className="h-9 rounded-md border bg-background px-2 text-sm"
+              value={pageSize}
+              onChange={(e) => changePageSize(Number(e.target.value))}
+            >
+              {[12, 24, 36, 48].map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
+          </div>
 
           <Button
             variant="outline"
@@ -205,7 +208,8 @@ export function GalleryGrid({
             onClick={goPrev}
             disabled={page <= 1}
           >
-            Previous
+            <span className="max-sm:hidden">Previous</span>
+            <span className="sm:hidden">Prev</span>
           </Button>
           <Button
             variant="outline"
@@ -213,7 +217,8 @@ export function GalleryGrid({
             onClick={goNext}
             disabled={page >= pageCount}
           >
-            Next
+            <span className="max-sm:hidden">Next</span>
+            <span className="sm:hidden">Next</span>
           </Button>
         </div>
       </div>

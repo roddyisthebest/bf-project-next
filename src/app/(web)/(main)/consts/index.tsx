@@ -1,4 +1,4 @@
-import { BookOpen } from "lucide-react";
+import { BookOpen, Church, MapPin, MessageCircle } from "lucide-react";
 
 export const subRoutes = [
   {
@@ -9,25 +9,25 @@ export const subRoutes = [
   },
   {
     id: 2,
-    icon: <BookOpen />,
+    icon: <Church />,
     label: "교회소개",
-    href: "/about/worship",
+    href: "/about",
   },
   {
     id: 3,
-    icon: <BookOpen />,
-    label: "교회소개",
-    href: "/about/worship",
+    icon: <MapPin />,
+    label: "오시는길",
+    href: "/about/location",
   },
   {
     id: 4,
-    icon: <BookOpen />,
-    label: "교회소개",
-    href: "/about/worship",
+    icon: <MessageCircle />,
+    label: "소통방",
+    href: "/boards/talk",
   },
 ];
 
-interface Route {
+export interface Route {
   title: string;
   href: string;
   subRoutes?: Route[];
@@ -165,6 +165,13 @@ export const timeTable = [
 ];
 
 export const locationCoordinate = {
-  x: 37.501258,
-  y: 127.03959,
+  x: 37.05175,
+  y: 127.0639,
+};
+
+export const churchInfo = {
+  name: "큰숲교회",
+  address: "경기도 평택시 장당동 123-45",
+  phone: "031-665-2004",
+  floor: "본당 2층",
 };
