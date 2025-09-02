@@ -149,9 +149,12 @@ export function GalleryGrid({
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
                   {post.thumbnail ? (
                     <Image
+                      fill
                       src={post.thumbnail}
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                      className="object-cover group-hover:scale-105 transition-transform duration-200"
+                      quality={90}
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-400">

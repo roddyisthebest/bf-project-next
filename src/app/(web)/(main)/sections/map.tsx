@@ -3,18 +3,12 @@
 import { Label } from "@/components/ui/label";
 import { useEffect } from "react";
 
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
-
 export default function MapSection() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    if (!(window as any).kakao) return;
-    const kakao = (window as any).kakao;
+    if (!window.kakao) return;
+    const kakao = window.kakao;
     kakao.maps.load(() => {
       const container = document.getElementById("map");
       if (!container) return;

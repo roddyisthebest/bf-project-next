@@ -8,7 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
+import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 
 interface ImageCarouselClientProps {
@@ -44,13 +44,15 @@ export function ImageCarouselClient({ posts }: ImageCarouselClientProps) {
         {posts.map((post) => (
           <CarouselItem key={post.id}>
             <div className="relative h-64 overflow-hidden bg-gray-900">
-              {/* 배경 이미지 */}
               {post.thumbnail && (
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{
-                    backgroundImage: `url(${post.thumbnail})`,
-                  }}
+                <Image
+                  fill
+                  src={post.thumbnail}
+                  alt={post.title}
+                  className="object-cover"
+                  quality={90}
+                  sizes="100vw"
+                  priority
                 />
               )}
             </div>
