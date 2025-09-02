@@ -1,5 +1,6 @@
 import Header from "@/app/(web)/(main)/components/header/header";
 import ImageCarousel from "@/app/(web)/(main)/components/carousel/image-carousel";
+import Footer from "@/app/(web)/(main)/components/footer";
 
 export default async function MainLayout({
   children,
@@ -16,7 +17,7 @@ export default async function MainLayout({
       <main className="relative z-10 px-36 max-xl:px-6  max-md:px-4 ">
         {children}
       </main>
-      <footer className="h-24 bg-primary"></footer>
+      <Footer />
     </div>
   );
 }
