@@ -30,10 +30,8 @@ export function GoogleButton({ className = "" }: { className?: string }) {
         provider: "google",
         options: {
           redirectTo: `${
-            window.location.origin
+            process.env.NEXT_PUBLIC_SITE_URL
           }/auth/callback?next=${encodeURIComponent(next)}`,
-          // 필요하면 refresh 토큰:
-          // queryParams: { access_type: "offline", prompt: "consent" },
         },
       });
     } finally {
