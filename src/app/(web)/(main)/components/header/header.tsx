@@ -86,7 +86,7 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 bg-gradient-to-b from-brand-50/60 to-white backdrop-blur z-50 transition-all duration-200 ${
+      className={`sticky top-0  bg-gradient-to-b from-brand-50/60 to-white backdrop-blur z-50 transition-all duration-200 ${
         isScrolled ? "border-b border-brand-100" : ""
       }`}
     >
@@ -198,8 +198,8 @@ export default function Header() {
           </DialogContent>
         </Dialog>
       </div>
-      {/* 하단 브랜드 라인 글로우 */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-brand-600/60 to-transparent" />
+      {/* 하단 라인 */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-600/60 to-transparent" />
     </header>
   );
 }
