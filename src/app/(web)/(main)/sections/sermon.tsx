@@ -4,7 +4,9 @@ import { Label } from "@/components/ui/label";
 import { formatDate, toEmbedUrl } from "@/lib/funcs";
 import { createClient } from "@/lib/supabase/server";
 import { ChapleView } from "@/types";
-import { Book, Calendar } from "lucide-react";
+import { Book, Calendar, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default async function SermonSection() {
   const supabase = await createClient();
@@ -39,9 +41,16 @@ export default async function SermonSection() {
 
   return (
     <section className="p-5 flex flex-col gap-y-5 min-w-0">
-      <div className="flex flex-col gap-y-1">
-        <Label className="text-primary font-bold text-xl">SERMON</Label>
-        <p className="text-neutral text-lg font-medium">주일예배</p>
+      <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-y-1">
+          <Label className="text-primary font-bold text-xl">SERMON</Label>
+          <p className="text-neutral text-lg font-medium">주일예배</p>
+        </div>
+        <Link href="/chaples/sunday">
+          <Button variant="ghost" size="sm" className="text-primary hover:text-primary-600">
+            더보기 <ArrowRight className="ml-1 h-4 w-4" />
+          </Button>
+        </Link>
       </div>
       <div className="flex flex-col gap-y-4">
         <div className="flex flex-col gap-y-4">
