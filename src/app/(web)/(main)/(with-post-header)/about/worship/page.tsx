@@ -1,7 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Calendar, MapPin, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Clock, Calendar, MapPin, Users, ArrowRight } from "lucide-react";
 import { timeTable } from "../../../consts";
+import Link from "next/link";
 
 export default function WorshipPage() {
   return (
@@ -14,39 +16,66 @@ export default function WorshipPage() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 mb-8">
-        {timeTable.map((worship, idx) => (
-          <Card
-            key={idx}
-            className="hover:shadow-lg transition-shadow duration-200"
-          >
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                  <Clock className="h-5 w-5 text-primary" />
-                  {worship.title}
-                </CardTitle>
-                <Badge
-                  variant="secondary"
-                  className="bg-primary-50 text-primary border-primary-200"
-                >
-                  정기예배
-                </Badge>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-2 text-lg font-semibold text-gray-800">
-                <Calendar className="h-4 w-4 text-gray-500" />
-                {worship.content}
-              </div>
-              <div className="mt-4 pt-4 border-t border-gray-100">
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <MapPin className="h-4 w-4" />
-                  큰숲교회 본당 (2층)
+        {timeTable.map((worship, idx) => {
+          const getWorshipLink = (title: string) => {
+            switch (title) {
+              case '주일예배':
+                return '/chaples/sunday';
+              case '수요예배':
+                return '/chaples/wednesday';
+              case '금요기도회':
+                return '/chaples/friday';
+              default:
+                return null;
+            }
+          };
+          
+          const worshipLink = getWorshipLink(worship.title);
+          
+          return (
+            <Card
+              key={idx}
+              className="hover:shadow-lg transition-shadow duration-200"
+            >
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl font-bold text-gray-900 flex items-center gap-2">
+                    <Clock className="h-5 w-5 text-primary" />
+                    {worship.title}
+                  </CardTitle>
+                  <Badge
+                    variant="secondary"
+                    className="bg-primary-50 text-primary border-primary-200"
+                  >
+                    정기예배
+                  </Badge>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center gap-2 text-lg font-semibold text-gray-800">
+                  <Calendar className="h-4 w-4 text-gray-500" />
+                  {worship.content}
+                </div>
+                <div className="mt-4 pt-4 border-t border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <MapPin className="h-4 w-4" />
+                      큰숲교회 본당 (2층)
+                    </div>
+                    {worshipLink && (
+                      <Link href={worshipLink}>
+                        <Button variant="ghost" size="sm" className="text-primary hover:text-primary-600">
+                          상세보기
+                          <ArrowRight className="ml-1 h-3 w-3" />
+                        </Button>
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
 
       <Card className="bg-gradient-to-r from-primary-50 to-brand-50 border-primary-200">
