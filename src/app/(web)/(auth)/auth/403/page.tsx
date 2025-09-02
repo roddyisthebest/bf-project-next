@@ -1,6 +1,16 @@
 // app/auth/forbidden/page.tsx
 import { Metadata } from "next";
 import Link from "next/link";
+import { CSSProperties } from "react";
+
+interface CustomCSSProperties extends CSSProperties {
+  '--dur'?: string;
+  '--rise'?: string;
+  '--dx'?: string;
+  '--scale'?: string;
+  '--sx'?: string;
+  '--sy'?: string;
+}
 
 export const metadata: Metadata = {
   title: "403 Forbidden",
@@ -21,56 +31,56 @@ export default function ForbiddenPage() {
         <div
           className="absolute bottom-20 left-[20%] h-32 w-32 rounded-full bg-emerald-300/25 blur-xl animate-smoke-strong animate-sway"
           style={{
-            ["--dur" as any]: "4.2s",
-            ["--rise" as any]: "-90px",
-            ["--dx" as any]: "5px",
-            ["--scale" as any]: "1.0",
-          }}
+            '--dur': '4.2s',
+            '--rise': '-90px',
+            '--dx': '5px',
+            '--scale': '1.0',
+          } as CustomCSSProperties}
         />
         <div
           className="absolute bottom-16 left-1/2 -translate-x-1/2 h-40 w-40 rounded-full bg-lime-300/20 blur-2xl animate-smoke-strong-2 animate-sway"
           style={{
-            ["--dur" as any]: "5.2s",
-            ["--rise" as any]: "-120px",
-            ["--dx" as any]: "-6px",
-            ["--scale" as any]: "1.05",
-          }}
+            '--dur': '5.2s',
+            '--rise': '-120px',
+            '--dx': '-6px',
+            '--scale': '1.05',
+          } as CustomCSSProperties}
         />
         <div
           className="absolute bottom-24 right-[22%] h-28 w-28 rounded-full bg-green-200/30 blur-xl animate-smoke-strong-3 animate-sway"
           style={{
-            ["--dur" as any]: "6s",
-            ["--rise" as any]: "-110px",
-            ["--dx" as any]: "4px",
-            ["--scale" as any]: "0.95",
-          }}
+            '--dur': '6s',
+            '--rise': '-110px',
+            '--dx': '4px',
+            '--scale': '0.95',
+          } as CustomCSSProperties}
         />
         <div
           className="absolute bottom-10 left-[35%] h-24 w-24 rounded-full bg-emerald-200/30 blur-xl animate-smoke-strong"
           style={{
-            ["--dur" as any]: "4.8s",
-            ["--rise" as any]: "-80px",
-            ["--dx" as any]: "3px",
-            ["--scale" as any]: "0.9",
-          }}
+            '--dur': '4.8s',
+            '--rise': '-80px',
+            '--dx': '3px',
+            '--scale': '0.9',
+          } as CustomCSSProperties}
         />
         <div
           className="absolute bottom-12 left-[55%] h-28 w-28 rounded-full bg-emerald-300/20 blur-xl animate-smoke-strong-2"
           style={{
-            ["--dur" as any]: "5.6s",
-            ["--rise" as any]: "-100px",
-            ["--dx" as any]: "-5px",
-            ["--scale" as any]: "1.1",
-          }}
+            '--dur': '5.6s',
+            '--rise': '-100px',
+            '--dx': '-5px',
+            '--scale': '1.1',
+          } as CustomCSSProperties}
         />
         <div
           className="absolute bottom-24 right-[35%] h-20 w-20 rounded-full bg-lime-200/25 blur-lg animate-smoke-strong-3"
           style={{
-            ["--dur" as any]: "6.4s",
-            ["--rise" as any]: "-110px",
-            ["--dx" as any]: "6px",
-            ["--scale" as any]: "0.85",
-          }}
+            '--dur': '6.4s',
+            '--rise': '-110px',
+            '--dx': '6px',
+            '--scale': '0.85',
+          } as CustomCSSProperties}
         />
       </div>
 
@@ -103,15 +113,15 @@ export default function ForbiddenPage() {
           {/* sparks 3개: 각기 다른 방향으로 튐 */}
           <span
             className="pointer-events-none absolute -right-3 top-1 block h-2 w-2 rounded-full bg-yellow-300 opacity-0 animate-spark"
-            style={{ ["--sx" as any]: "22px", ["--sy" as any]: "-14px" }}
+            style={{ '--sx': '22px', '--sy': '-14px' } as CustomCSSProperties}
           />
           <span
             className="pointer-events-none absolute -right-5 top-4 block h-2 w-2 rounded-full bg-yellow-200 opacity-0 animate-spark"
-            style={{ ["--sx" as any]: "16px", ["--sy" as any]: "-8px" }}
+            style={{ '--sx': '16px', '--sy': '-8px' } as CustomCSSProperties}
           />
           <span
             className="pointer-events-none absolute -right-2 top-6 block h-2 w-2 rounded-full bg-amber-200 opacity-0 animate-spark"
-            style={{ ["--sx" as any]: "26px", ["--sy" as any]: "-20px" }}
+            style={{ '--sx': '26px', '--sy': '-20px' } as CustomCSSProperties}
           />
         </div>
 
