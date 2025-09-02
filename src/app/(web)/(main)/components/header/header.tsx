@@ -86,19 +86,20 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 bg-gradient-to-b from-emerald-50/60 to-white backdrop-blur z-50 transition-all duration-200 ${
-        isScrolled ? "border-b border-emerald-100" : ""
+      className={`sticky top-0 bg-gradient-to-b from-brand-50/60 to-white backdrop-blur z-50 transition-all duration-200 ${
+        isScrolled ? "border-b border-brand-100" : ""
       }`}
     >
       <div className="h-20 flex items-center justify-between px-4">
         <div className="flex items-center gap-4">
           {/* 로고 */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="relative block">
             <Image
               src="/logo_transparent.png"
-              alt="Logo"
+              alt="큰숲교회 로고"
               width={80}
               height={80}
+              className="object-contain drop-shadow-lg hover:scale-105 transition-transform duration-300"
             />
           </Link>
 
@@ -112,7 +113,7 @@ export default function Header() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="text-emerald-700 border-emerald-200 hover:bg-emerald-50 rounded-full p-2"
+                  className="text-brand-600 border-brand-100 hover:bg-brand-50 rounded-full p-2"
                 >
                   <User className="h-4 w-4" />
                 </Button>
@@ -122,7 +123,7 @@ export default function Header() {
                   <div className="font-medium text-gray-900">
                     {user?.user_metadata.name || user.email}
                   </div>
-                  <div className="text-xs text-gray-500">{user.email}</div>
+                  <div className="text-xs text-gray-600">{user.email}</div>
                 </div>
                 <DropdownMenuItem onClick={handleLogout}>
                   로그아웃
@@ -133,7 +134,7 @@ export default function Header() {
             <Link href="/login">
               <Button
                 variant="outline"
-                className="border-emerald-200 text-emerald-800 hover:bg-emerald-50 rounded-xl"
+                className="border-brand-100 text-brand-600 hover:bg-brand-50 rounded-xl"
               >
                 로그인
               </Button>
@@ -149,8 +150,8 @@ export default function Header() {
           <DialogContent className="h-full  p-0 min-w-full [&>button]:hidden rounded-none">
             <div className="flex flex-col ">
               <DialogTitle
-                className={`flex items-center justify-between h-20 px-4 bg-gradient-to-b from-emerald-50/60 to-white backdrop-blur transition-all duration-200 ${
-                  isScrolled ? "border-b border-emerald-100" : ""
+                className={`flex items-center justify-between h-20 px-4 bg-gradient-to-b from-brand-50/60 to-white backdrop-blur transition-all duration-200 ${
+                  isScrolled ? "border-b border-brand-100" : ""
                 }`}
               >
                 <Link href="/" className="flex items-center">
@@ -165,16 +166,16 @@ export default function Header() {
               </DialogTitle>
               <div className="px-4 mt-4">
                 {user ? (
-                  <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
+                  <div className="bg-brand-50 rounded-xl p-4 border border-brand-100">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                        <User className="h-5 w-5 text-emerald-600" />
+                      <div className="w-10 h-10 bg-brand-100 rounded-full flex items-center justify-center">
+                        <User className="h-5 w-5 text-brand-600" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="font-medium text-gray-900 truncate">
                           {user?.user_metadata.name || user.email}
                         </div>
-                        <div className="text-xs text-gray-500 truncate">
+                        <div className="text-xs text-gray-600 truncate">
                           {user.email}
                         </div>
                       </div>
@@ -185,7 +186,7 @@ export default function Header() {
                   <Link href="/login">
                     <Button
                       variant="outline"
-                      className="border-emerald-200 text-emerald-800 hover:bg-emerald-50 rounded-xl w-full"
+                      className="border-brand-100 text-brand-600 hover:bg-brand-50 rounded-xl w-full"
                     >
                       로그인
                     </Button>
@@ -197,8 +198,8 @@ export default function Header() {
           </DialogContent>
         </Dialog>
       </div>
-      {/* 하단 에메랄드 라인 글로우 */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-emerald-300/60 to-transparent" />
+      {/* 하단 브랜드 라인 글로우 */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-brand-600/60 to-transparent" />
     </header>
   );
 }

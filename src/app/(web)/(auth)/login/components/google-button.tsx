@@ -17,7 +17,7 @@ function GoogleIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export function GoogleButton({ className = "w-80" }: { className?: string }) {
+export function GoogleButton({ className = "" }: { className?: string }) {
   const supabase = createClient();
   const search = useSearchParams();
   const next = search.get("next") ?? "/";
@@ -49,7 +49,7 @@ export function GoogleButton({ className = "w-80" }: { className?: string }) {
       variant="outline"
       aria-label="Continue with Google"
       className={[
-        "group relative h-13 justify-center gap-3  border",
+        "group relative h-13 justify-center gap-3  border w-full",
         "bg-white hover:bg-white/90 dark:bg-neutral-950",
         "border-neutral-200 dark:border-neutral-800",
         "shadow-sm hover:shadow-md active:shadow transition-all duration-150",

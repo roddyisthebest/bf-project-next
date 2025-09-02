@@ -27,7 +27,7 @@ export function PostHeader() {
   );
 
   return (
-    <div className="border-b border-primary-100 py-6 px-8 flex flex-col gap-y-2">
+    <div className="border-b border-gray-200 py-6 px-8 flex flex-col gap-y-2">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>

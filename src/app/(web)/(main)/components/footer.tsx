@@ -65,7 +65,7 @@ export default function Footer() {
             <div className="text-right">
               <p className="text-xs text-gray-400 leading-relaxed">
                 Copyright © 2025{" "}
-                <span className="text-emerald-300 font-medium">shy</span>
+                <a href="https://github.com/roddyisthebest" target="_blank" rel="noopener noreferrer" className="text-emerald-300 font-medium hover:text-emerald-200 transition-colors">shy</a>
                 <br />
                 All Rights Reserved.
               </p>

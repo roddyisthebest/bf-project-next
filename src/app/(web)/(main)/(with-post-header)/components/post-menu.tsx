@@ -15,9 +15,9 @@ export function PostMenu() {
   }
 
   return (
-    <div className="divide-y max-lg:w-full divide-brand-100 w-56 min-w-56">
+    <div className="divide-y max-lg:w-full divide-gray-200 w-56 min-w-56 ">
       <div className="py-8 max-lg:hidden flex items-center justify-center bg-primary-100 ">
-        <h2 className="text-2xl max-lg:text-lg font-semibold text-primary">
+        <h2 className="text-2xl max-lg:text-lg font-bold text-primary">
           {route.title}
         </h2>
       </div>
