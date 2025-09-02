@@ -165,6 +165,13 @@ export const timeTable = [
 ];
 
 export const locationCoordinate = {
-  x: 37.501258,
-  y: 127.03959,
+  x: 37.05175,
+  y: 127.0639,
+};
+
+export const churchInfo = {
+  name: "큰숲교회",
+  address: "경기도 평택시 장당동 123-45",
+  phone: "031-665-2004",
+  floor: "본당 2층",
 };

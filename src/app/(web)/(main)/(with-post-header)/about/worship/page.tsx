@@ -41,7 +41,7 @@ export default function WorshipPage() {
               <div className="mt-4 pt-4 border-t border-gray-100">
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <MapPin className="h-4 w-4" />
-                  큰숲교회 본당
+                  큰숲교회 본당 (2층)
                 </div>
               </div>
             </CardContent>
