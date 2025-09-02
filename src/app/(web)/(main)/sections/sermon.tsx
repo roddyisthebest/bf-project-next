@@ -48,7 +48,8 @@ export default async function SermonSection() {
         </div>
         <Link href="/chaples/sunday">
           <Button variant="ghost" size="sm" className="text-primary hover:text-primary-600">
-            더보기 <ArrowRight className="ml-1 h-4 w-4" />
+            <span className="max-md:hidden">더보기</span>
+            <ArrowRight className="ml-1 h-4 w-4 max-md:ml-0" />
           </Button>
         </Link>
       </div>
@@ -58,12 +59,12 @@ export default async function SermonSection() {
             {recentChaple.title || "No Title"}
           </h1>
           <div className="flex gap-2 flex-wrap">
-            <Badge className="bg-primary-50 border-primary-100 text-primary text-sm py-2 px-3 font-semibold flex gap-x-2">
-              <Calendar />
+            <Badge className="bg-primary-50 border-primary-100 text-primary text-sm max-sm:text-xs py-2 max-sm:py-1 px-3 max-sm:px-2 font-semibold flex gap-x-2 max-sm:gap-x-1">
+              <Calendar className="max-sm:h-3 max-sm:w-3" />
               {formatDate(recentChaple.created_at)}
             </Badge>
-            <Badge className="bg-primary-50 border-primary-100 text-primary text-sm py-2 px-3 font-semibold flex gap-x-2">
-              <Book />
+            <Badge className="bg-primary-50 border-primary-100 text-primary text-sm max-sm:text-xs py-2 max-sm:py-1 px-3 max-sm:px-2 font-semibold flex gap-x-2 max-sm:gap-x-1">
+              <Book className="max-sm:h-3 max-sm:w-3" />
               {recentChaple.verse || "No Verses"}
             </Badge>
           </div>
