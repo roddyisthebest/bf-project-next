@@ -131,19 +131,21 @@ export default function Header() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <div className="px-3 py-2 text-sm border-b">
-                  <div className="font-medium text-gray-900">
-                    {user?.user_metadata.name || user.email}
+                  <div className="flex items-center gap-2">
+                    <div className="font-medium text-gray-900">
+                      {user?.user_metadata.name || user.email}
+                    </div>
+                    {profile?.role && (
+                      <span className={`text-xs font-medium px-1.5 py-0.5 rounded text-center ${
+                        profile.role === UserRole.Admin 
+                          ? 'bg-red-100 text-red-700' 
+                          : 'bg-blue-100 text-blue-700'
+                      }`}>
+                        {profile.role === UserRole.Admin ? '관리자' : '사용자'}
+                      </span>
+                    )}
                   </div>
                   <div className="text-xs text-gray-600">{user.email}</div>
-                  {profile?.role && (
-                    <div className={`text-xs font-medium mt-1 px-2 py-1 rounded-full text-center ${
-                      profile.role === UserRole.Admin 
-                        ? 'bg-red-100 text-red-700' 
-                        : 'bg-blue-100 text-blue-700'
-                    }`}>
-                      {profile.role === UserRole.Admin ? '관리자' : '사용자'}
-                    </div>
-                  )}
                 </div>
                 {profile?.role === UserRole.Admin && (
                   <DropdownMenuItem asChild>
@@ -199,21 +201,23 @@ export default function Header() {
                         <User className="h-5 w-5 text-brand-600" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="font-medium text-gray-900 truncate">
-                          {user?.user_metadata.name || user.email}
+                        <div className="flex items-center gap-2">
+                          <div className="font-medium text-gray-900 truncate">
+                            {user?.user_metadata.name || user.email}
+                          </div>
+                          {profile?.role && (
+                            <span className={`text-xs font-medium px-1.5 py-0.5 rounded text-center ${
+                              profile.role === UserRole.Admin 
+                                ? 'bg-red-100 text-red-700' 
+                                : 'bg-blue-100 text-blue-700'
+                            }`}>
+                              {profile.role === UserRole.Admin ? '관리자' : '사용자'}
+                            </span>
+                          )}
                         </div>
                         <div className="text-xs text-gray-600 truncate">
                           {user.email}
                         </div>
-                        {profile?.role && (
-                          <div className={`text-xs font-medium mt-1 px-2 py-1 rounded-full text-center ${
-                            profile.role === UserRole.Admin 
-                              ? 'bg-red-100 text-red-700' 
-                              : 'bg-blue-100 text-blue-700'
-                          }`}>
-                            {profile.role === UserRole.Admin ? '관리자' : '사용자'}
-                          </div>
-                        )}
                       </div>
                     </div>
                     {profile?.role === UserRole.Admin && (
