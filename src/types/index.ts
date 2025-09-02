@@ -10,8 +10,9 @@ export interface PostBody {
 export interface PostView extends PostBody {
   id: number;
   user_id: number;
-  created_at: number;
-  updated_at: number;
+  created_at: string;
+  updated_at: string;
+  profiles: Profile | null;
 }
 
 export interface ChapleView extends ChapleBody {

@@ -166,7 +166,7 @@ export function GalleryGrid({
                     {post.title}
                   </h3>
                   <div className="flex justify-between items-center text-xs text-gray-500">
-                    <span>{(post as any).profiles?.name || "익명"}</span>
+                    <span>{post.profiles?.name || "익명"}</span>
                     <span>{formatDate(post.created_at)}</span>
                   </div>
                 </div>

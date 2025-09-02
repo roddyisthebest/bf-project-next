@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/funcs";
 import { createClient } from "@/lib/supabase/server";
 import { PostView, PageProps } from "@/types";
-import { Calendar, User, Edit, Trash2 } from "lucide-react";
+import { Calendar, User, Edit } from "lucide-react";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -62,7 +62,7 @@ export default async function BoardDetailPage({ params }: PageProps) {
             </Badge>
             <Badge className="bg-primary-50 border-primary-100 text-primary text-sm py-2 px-3 font-semibold flex gap-x-2">
               <User />
-              {(post as any).profiles?.name || "익명"}
+              {post.profiles?.name || "익명"}
             </Badge>
           </div>
 

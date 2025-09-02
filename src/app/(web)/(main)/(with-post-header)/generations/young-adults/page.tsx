@@ -5,7 +5,6 @@ import {
   Calendar,
   MapPin,
   Users,
-  Music,
   MessageCircle,
   Heart,
   Smartphone,

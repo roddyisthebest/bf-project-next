@@ -105,7 +105,8 @@ export function BoardsTable({
   const goPrev = () =>
     page > 1 && pushWithParams({ title, sort, page: page - 1, pageSize });
   const goNext = () =>
-    page < pageCount && pushWithParams({ title, sort, page: page + 1, pageSize });
+    page < pageCount &&
+    pushWithParams({ title, sort, page: page + 1, pageSize });
 
   const getDetailPath = (post: PostView) =>
     isAdmin
@@ -144,9 +145,7 @@ export function BoardsTable({
 
         {user && (
           <Button asChild className="ml-2">
-            <Link href="/boards/new">
-              글쓰기
-            </Link>
+            <Link href="/boards/new">글쓰기</Link>
           </Button>
         )}
       </div>
@@ -184,7 +183,7 @@ export function BoardsTable({
                       </span>
                     </TableCell>
                     <TableCell className="text-sm text-muted-foreground">
-                      {(r as any).profiles?.name || r.user_id?.slice(0, 8) + '...' || "-"}
+                      {r.profiles?.name || r.user_id + "..." || "-"}
                     </TableCell>
                     <TableCell className="text-muted-foreground">
                       {formatDate(r.created_at)}
@@ -206,8 +205,12 @@ export function BoardsTable({
       {/* Footer: pagination */}
       <div className="flex items-center justify-between gap-2 py-4">
         <div className="text-sm text-muted-foreground">
-          <span className="max-sm:hidden">Page {page} / {pageCount} · Total {total.toLocaleString()}</span>
-          <span className="sm:hidden">{page}/{pageCount} · {total.toLocaleString()}</span>
+          <span className="max-sm:hidden">
+            Page {page} / {pageCount} · Total {total.toLocaleString()}
+          </span>
+          <span className="sm:hidden">
+            {page}/{pageCount} · {total.toLocaleString()}
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-2 max-sm:hidden">
