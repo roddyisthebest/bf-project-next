@@ -27,7 +27,7 @@ import {
 
 import { defaultPostBody } from "@/consts";
 import { PostType } from "@/enums";
-import { PostBody, PostView } from "@/types";
+import { PostBody } from "@/types";
 import { createImageUploadCommand } from "./create-image-upload-command";
 import { commands, ICommand } from "@uiw/react-md-editor";
 import { useEffect, useMemo, useState } from "react";

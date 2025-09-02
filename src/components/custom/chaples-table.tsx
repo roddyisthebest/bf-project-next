@@ -4,7 +4,6 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -21,7 +20,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
-import { ChapleView, PostView } from "@/types";
+import { ChapleView } from "@/types";
 
 type SortOrder = "newest" | "oldest";
 
@@ -83,11 +82,6 @@ export function ChaplesTable({
     // 보장: 비어있는 q 제거
     if (!params.get("q")) params.delete("q");
     router.push(`${pathname}?${params.toString()}`);
-  };
-
-  const onSearch = () => {
-    // 검색 시 1페이지로
-    pushWithParams({ q, sort, page: 1, pageSize });
   };
 
   const changeSort = (s: SortOrder) => {
@@ -198,8 +192,12 @@ export function ChaplesTable({
       {/* Footer: pagination */}
       <div className="flex items-center justify-between gap-2 py-4">
         <div className="text-sm text-muted-foreground">
-          <span className="max-sm:hidden">Page {page} / {pageCount} · Total {total.toLocaleString()}</span>
-          <span className="sm:hidden">{page}/{pageCount} · {total.toLocaleString()}</span>
+          <span className="max-sm:hidden">
+            Page {page} / {pageCount} · Total {total.toLocaleString()}
+          </span>
+          <span className="sm:hidden">
+            {page}/{pageCount} · {total.toLocaleString()}
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-2 max-sm:hidden">

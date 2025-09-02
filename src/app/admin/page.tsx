@@ -7,6 +7,13 @@ import {
   Newspaper,
   ChevronRight,
 } from "lucide-react";
+import { CSSProperties } from "react";
+
+interface CustomCSSProperties extends CSSProperties {
+  '--rise'?: string;
+  '--dx'?: string;
+  '--dur'?: string;
+}
 
 function ChemTile({
   sym,
@@ -46,18 +53,18 @@ export default function AdminPage() {
         <div
           className="absolute bottom-10 left-[14%] h-40 w-40 rounded-full bg-emerald-400/12 blur-2xl animate-smoke"
           style={{
-            ["--rise" as any]: "160px",
-            ["--dx" as any]: "12px",
-            ["--dur" as any]: "8s",
-          }}
+            '--rise': '160px',
+            '--dx': '12px',
+            '--dur': '8s',
+          } as CustomCSSProperties}
         />
         <div
           className="absolute bottom-16 right-[12%] h-56 w-56 rounded-full bg-lime-300/10 blur-3xl animate-smoke"
           style={{
-            ["--rise" as any]: "200px",
-            ["--dx" as any]: "-16px",
-            ["--dur" as any]: "10s",
-          }}
+            '--rise': '200px',
+            '--dx': '-16px',
+            '--dur': '10s',
+          } as CustomCSSProperties}
         />
       </div>
 

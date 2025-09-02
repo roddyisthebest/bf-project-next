@@ -25,13 +25,14 @@ import { createClient } from "@/lib/supabase/client";
 import { User as UserType } from "@supabase/supabase-js";
 import { useRouter, usePathname } from "next/navigation";
 import { UserRole } from "@/enums";
+import { Profile } from "@/types";
 
 export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [user, setUser] = useState<UserType | null>(null);
-  const [profile, setProfile] = useState<{ role: UserRole } | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
 
   const handleLogout = async () => {
     try {

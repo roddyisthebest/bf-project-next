@@ -1,13 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   Clock,
   Calendar,
   MapPin,
   Users,
-  Heart,
   BookOpen,
-  Video,
   VideoOff,
 } from "lucide-react";
 import { churchInfo } from "../../../consts";

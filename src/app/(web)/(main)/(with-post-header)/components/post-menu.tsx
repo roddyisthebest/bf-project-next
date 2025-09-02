@@ -1,12 +1,11 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { routes } from "../../consts";
 import Link from "next/link";
 
 export function PostMenu() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   const route = routes.find((route) => pathname.startsWith(route.href));
 

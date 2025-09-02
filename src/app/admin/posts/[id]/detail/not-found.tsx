@@ -1,5 +1,12 @@
 // app/admin/posts/[id]/detail/not-found.tsx
 import Link from "next/link";
+import { CSSProperties } from "react";
+
+interface CustomCSSProperties extends CSSProperties {
+  '--rise'?: string;
+  '--dx'?: string;
+  '--dur'?: string;
+}
 
 function ChemTile({
   sym,
@@ -41,23 +48,19 @@ export default function PostNotFound() {
       <div className="pointer-events-none absolute inset-0 z-[5] overflow-hidden mix-blend-screen">
         <div
           className="absolute -bottom-8 left-[15%] h-40 w-40 rounded-full bg-emerald-400/10 blur-2xl animate-smoke"
-          style={
-            {
-              ["--rise" as any]: "140px",
-              ["--dx" as any]: "12px",
-              ["--dur" as any]: "7s",
-            } as React.CSSProperties
-          }
+          style={{
+            '--rise': '140px',
+            '--dx': '12px',
+            '--dur': '7s',
+          } as CustomCSSProperties}
         />
         <div
           className="absolute bottom-10 right-[18%] h-60 w-60 rounded-full bg-lime-300/10 blur-3xl animate-smoke"
-          style={
-            {
-              ["--rise" as any]: "180px",
-              ["--dx" as any]: "-16px",
-              ["--dur" as any]: "9s",
-            } as React.CSSProperties
-          }
+          style={{
+            '--rise': '180px',
+            '--dx': '-16px',
+            '--dur': '9s',
+          } as CustomCSSProperties}
         />
       </div>
 

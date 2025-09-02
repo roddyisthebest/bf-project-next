@@ -7,18 +7,12 @@ import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 import { locationCoordinate, churchInfo } from "../../../consts";
 
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
-
 export default function LocationPage() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    if (!(window as any).kakao) return;
-    const kakao = (window as any).kakao;
+    if (!window.kakao) return;
+    const kakao = window.kakao;
     kakao.maps.load(() => {
       const container = document.getElementById("map");
       if (!container) return;
@@ -141,7 +135,7 @@ export default function LocationPage() {
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">네비게이션</h4>
               <p className="text-sm text-gray-600">
-                "{churchInfo.name}" 또는 "{churchInfo.address}"로 검색하세요.
+                &quot;{churchInfo.name}&quot; 또는 &quot;{churchInfo.address}&quot;로 검색하세요.
               </p>
             </div>
           </CardContent>

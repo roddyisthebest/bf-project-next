@@ -76,8 +76,8 @@ export default function Footer() {
         {/* 하단 구분선 */}
         <div className="mt-8 pt-6 border-t border-gray-600/30">
           <p className="text-center text-xs text-gray-500">
-            "아마존이 세계의 산소를 공급하듯이, 우리 큰숲교회는 아름다운 세상을
-            향한 산소를 공급합니다"
+            &quot;아마존이 세계의 산소를 공급하듯이, 우리 큰숲교회는 아름다운 세상을
+            향한 산소를 공급합니다&quot;
           </p>
         </div>
       </div>

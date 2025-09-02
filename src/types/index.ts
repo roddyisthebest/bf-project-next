@@ -1,4 +1,4 @@
-import { ChapleType, PostType } from "@/enums";
+import { ChapleType, PostType, UserRole } from "@/enums";
 
 export interface PostBody {
   title: string;
@@ -10,8 +10,9 @@ export interface PostBody {
 export interface PostView extends PostBody {
   id: number;
   user_id: number;
-  created_at: number;
-  updated_at: number;
+  created_at: string;
+  updated_at: string;
+  profiles: Profile | null;
 }
 
 export interface ChapleView extends ChapleBody {
@@ -35,3 +36,9 @@ export type PageProps = {
 export type PostTypePageProps = {
   params: Promise<{ type: PostType }>;
 };
+
+export interface Profile {
+  id: string;
+  role: UserRole;
+  name?: string;
+}

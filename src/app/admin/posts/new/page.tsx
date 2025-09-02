@@ -1,7 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { PostForm } from "../components/post-form";
 import { PostBody } from "@/types";
-import { redirect } from "next/navigation";
 
 export default function NewPostPage() {
   async function create(values: PostBody) {

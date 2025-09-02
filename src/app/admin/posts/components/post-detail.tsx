@@ -11,7 +11,6 @@ import { PostType } from "@/enums";
 import type { PostView } from "@/types";
 import { Pencil, ImageIcon, Trash, Loader } from "lucide-react";
 import clsx from "clsx";
-import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
