@@ -74,7 +74,9 @@ export default async function BoardDetailPage({ params }: PageProps) {
                   수정
                 </Link>
               </Button>
-              <DeleteButton postId={post.id} postType={post.type} />
+              {post.type && (
+                <DeleteButton postId={post.id} postType={post.type} />
+              )}
             </div>
           )}
         </div>
