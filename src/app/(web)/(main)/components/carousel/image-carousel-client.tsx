@@ -18,7 +18,7 @@ interface ImageCarouselClientProps {
 export function ImageCarouselClient({ posts }: ImageCarouselClientProps) {
   if (posts.length === 0) {
     return (
-      <div className="h-64 flex items-center justify-center bg-gray-50 border-y border-gray-200">
+      <div className="h-48 sm:h-64 flex items-center justify-center bg-gray-50 border-y border-gray-200">
         <div className="text-center">
           <p className="text-gray-600 font-medium">
             아직 업로드된 이미지가 없습니다.
@@ -33,7 +33,7 @@ export function ImageCarouselClient({ posts }: ImageCarouselClientProps) {
 
   return (
     <Carousel
-      className="h-64"
+      className="h-48 sm:h-64"
       plugins={[
         Autoplay({
           delay: 5000,
@@ -43,7 +43,7 @@ export function ImageCarouselClient({ posts }: ImageCarouselClientProps) {
       <CarouselContent>
         {posts.map((post) => (
           <CarouselItem key={post.id}>
-            <div className="relative h-64 overflow-hidden bg-gray-900">
+            <div className="relative h-48 sm:h-64 overflow-hidden bg-gray-900">
               {post.thumbnail && (
                 <Image
                   fill
