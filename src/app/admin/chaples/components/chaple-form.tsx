@@ -127,8 +127,6 @@ export function ChapleForm({
     }
   };
 
-  console.log(initialValues, "initialsValue");
-
   useEffect(() => {
     form.reset({
       ...initialValues,

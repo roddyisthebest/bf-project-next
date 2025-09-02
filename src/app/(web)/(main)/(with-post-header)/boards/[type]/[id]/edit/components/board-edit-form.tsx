@@ -94,9 +94,9 @@ export function BoardEditForm({
   }, []);
 
   const extractFirstImageUrl = (md: string): string | null => {
-    const regex = /!\[[^\]]*\]\((?<url>[^)\s]+)(?:\s+"[^"]*")?\)/;
+    const regex = /!\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)/;
     const match = md.match(regex);
-    return match?.groups?.url ?? null;
+    return match?.[1] ?? null;
   };
 
   const handleSubmit = async (values: PostFormValues) => {

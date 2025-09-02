@@ -59,9 +59,6 @@ export default function Header() {
     }
   };
 
-  console.log(user, "user");
-  console.log(profile, "profile");
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
@@ -82,8 +79,8 @@ export default function Header() {
           .from("profiles")
           .select("role")
           .eq("id", user.id)
-          .single();
-        
+          .single<Profile>();
+
         setProfile(profile);
       }
     };
@@ -137,12 +134,14 @@ export default function Header() {
                       {user?.user_metadata.name || user.email}
                     </div>
                     {profile?.role && (
-                      <span className={`text-xs font-medium px-1.5 py-0.5 rounded text-center ${
-                        profile.role === UserRole.Admin 
-                          ? 'bg-red-100 text-red-700' 
-                          : 'bg-blue-100 text-blue-700'
-                      }`}>
-                        {profile.role === UserRole.Admin ? '관리자' : '사용자'}
+                      <span
+                        className={`text-xs font-medium px-1.5 py-0.5 rounded text-center ${
+                          profile.role === UserRole.Admin
+                            ? "bg-red-100 text-red-700"
+                            : "bg-blue-100 text-blue-700"
+                        }`}
+                      >
+                        {profile.role === UserRole.Admin ? "관리자" : "사용자"}
                       </span>
                     )}
                   </div>
@@ -207,12 +206,16 @@ export default function Header() {
                             {user?.user_metadata.name || user.email}
                           </div>
                           {profile?.role && (
-                            <span className={`text-xs font-medium px-1.5 py-0.5 rounded text-center ${
-                              profile.role === UserRole.Admin 
-                                ? 'bg-red-100 text-red-700' 
-                                : 'bg-blue-100 text-blue-700'
-                            }`}>
-                              {profile.role === UserRole.Admin ? '관리자' : '사용자'}
+                            <span
+                              className={`text-xs font-medium px-1.5 py-0.5 rounded text-center ${
+                                profile.role === UserRole.Admin
+                                  ? "bg-red-100 text-red-700"
+                                  : "bg-blue-100 text-blue-700"
+                              }`}
+                            >
+                              {profile.role === UserRole.Admin
+                                ? "관리자"
+                                : "사용자"}
                             </span>
                           )}
                         </div>
@@ -223,8 +226,8 @@ export default function Header() {
                     </div>
                     {profile?.role === UserRole.Admin && (
                       <Link href="/admin" className="block mb-3">
-                        <Button 
-                          variant="outline" 
+                        <Button
+                          variant="outline"
                           className="w-full border-red-200 text-red-700 hover:bg-red-50 rounded-xl"
                         >
                           관리자 페이지

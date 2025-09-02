@@ -12,16 +12,17 @@ type SearchParams = {
 export default async function ChaplesPage({
   searchParams,
 }: {
-  searchParams?: SearchParams;
+  searchParams?: Promise<SearchParams>;
 }) {
-  const q = (searchParams?.q ?? "").trim();
-  const sort = (searchParams?.sort === "oldest" ? "oldest" : "newest") as
+  const params = await searchParams;
+  const q = (params?.q ?? "").trim();
+  const sort = (params?.sort === "oldest" ? "oldest" : "newest") as
     | "newest"
     | "oldest";
-  const page = Math.max(1, Number(searchParams?.page ?? "1")); // 1-based
+  const page = Math.max(1, Number(params?.page ?? "1")); // 1-based
   const pageSize = Math.min(
     100,
-    Math.max(1, Number(searchParams?.pageSize ?? "10"))
+    Math.max(1, Number(params?.pageSize ?? "10"))
   );
 
   const from = (page - 1) * pageSize;

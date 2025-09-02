@@ -39,8 +39,9 @@ export function createImageUploadCommand(
 
           // 외부에서도 필요하면 콜백 사용 (예: 토스트)
           onUploaded?.(url);
-        } catch (e: any) {
-          alert(e?.message ?? "이미지 업로드 실패");
+        } catch (e: unknown) {
+          const message = e instanceof Error ? e.message : "이미지 업로드 실패";
+          alert(message);
         }
       };
 
