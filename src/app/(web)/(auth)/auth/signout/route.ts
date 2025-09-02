@@ -1,8 +1,8 @@
 // app/auth/logout/route.ts
 import { createClient } from "@/lib/supabase/server";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+export async function POST() {
   const res = NextResponse.json({ success: true });
 
   const supabase = await createClient();

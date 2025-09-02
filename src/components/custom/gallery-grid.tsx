@@ -15,6 +15,7 @@ import {
 import { ChevronDown } from "lucide-react";
 import { PostView } from "@/types";
 import { User } from "@supabase/supabase-js";
+import Image from "next/image";
 
 type SortOrder = "newest" | "oldest";
 
@@ -94,7 +95,8 @@ export function GalleryGrid({
   const goPrev = () =>
     page > 1 && pushWithParams({ title, sort, page: page - 1, pageSize });
   const goNext = () =>
-    page < pageCount && pushWithParams({ title, sort, page: page + 1, pageSize });
+    page < pageCount &&
+    pushWithParams({ title, sort, page: page + 1, pageSize });
 
   return (
     <div className="w-full">
@@ -128,9 +130,7 @@ export function GalleryGrid({
 
         {user && (
           <Button asChild className="ml-2">
-            <Link href="/boards/new">
-              글쓰기
-            </Link>
+            <Link href="/boards/new">글쓰기</Link>
           </Button>
         )}
       </div>
@@ -148,7 +148,7 @@ export function GalleryGrid({
                 {/* Thumbnail */}
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
                   {post.thumbnail ? (
-                    <img
+                    <Image
                       src={post.thumbnail}
                       alt={post.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
@@ -159,7 +159,7 @@ export function GalleryGrid({
                     </div>
                   )}
                 </div>
-                
+
                 {/* Content */}
                 <div className="p-3">
                   <h3 className="font-medium text-sm line-clamp-2 mb-1">
@@ -183,8 +183,12 @@ export function GalleryGrid({
       {/* Footer: pagination */}
       <div className="flex items-center justify-between gap-2 py-4">
         <div className="text-sm text-muted-foreground">
-          <span className="max-sm:hidden">Page {page} / {pageCount} · Total {total.toLocaleString()}</span>
-          <span className="sm:hidden">{page}/{pageCount} · {total.toLocaleString()}</span>
+          <span className="max-sm:hidden">
+            Page {page} / {pageCount} · Total {total.toLocaleString()}
+          </span>
+          <span className="sm:hidden">
+            {page}/{pageCount} · {total.toLocaleString()}
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-2 max-sm:hidden">

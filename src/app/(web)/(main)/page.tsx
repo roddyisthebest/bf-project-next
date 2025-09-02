@@ -1,30 +1,23 @@
 import { Separator } from "@/components/ui/separator";
-import {
-  ArrowRight,
-  Book,
-  BookOpen,
-  Calendar,
-  ChevronRight,
-} from "lucide-react";
+
 import RectangleButton from "./components/rectangle-button";
-import { Badge } from "@/components/ui/badge";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Label } from "@/components/ui/label";
 import { subRoutes, timeTable } from "./consts";
 import Image from "next/image";
-import { createClient } from "@/lib/supabase/server";
-import { ChapleView, PostView } from "@/types";
 import SermonSection from "./sections/sermon";
 import MapSection from "./sections/map";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "큰숲교회 - 세상을 향한 산소같은 교회",
-  description: "숲속에 드러나는 십자가, 복음의 능력으로 전도·훈련·사역·선교·예배를 통해 아름다운 세상을 향한 산소를 공급하는 큰숲교회입니다.",
-  keywords: "큰숲교회, 십자가, 복음, 전도, 훈련, 사역, 선교, 예배, 회복, 쉼, 이희동 목사, 기독교회, 평택, 장당동, 평택교회",
+  description:
+    "숲속에 드러나는 십자가, 복음의 능력으로 전도·훈련·사역·선교·예배를 통해 아름다운 세상을 향한 산소를 공급하는 큰숲교회입니다.",
+  keywords:
+    "큰숲교회, 십자가, 복음, 전도, 훈련, 사역, 선교, 예배, 회복, 쉼, 이희동 목사, 기독교회, 평택, 장당동, 평택교회",
   openGraph: {
     title: "큰숲교회 - 세상을 향한 산소같은 교회",
-    description: "숲속에 드러나는 십자가, 복음의 능력으로 민족과 세대와 열방 가운데 산소같은 교회",
+    description:
+      "숲속에 드러나는 십자가, 복음의 능력으로 민족과 세대와 열방 가운데 산소같은 교회",
     type: "website",
     locale: "ko_KR",
     siteName: "큰숲교회",
@@ -32,7 +25,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "큰숲교회 - 세상을 향한 산소같은 교회",
-    description: "숲속에 드러나는 십자가, 복음의 능력으로 민족과 세대와 열방 가운데 산소같은 교회",
+    description:
+      "숲속에 드러나는 십자가, 복음의 능력으로 민족과 세대와 열방 가운데 산소같은 교회",
   },
   robots: {
     index: true,

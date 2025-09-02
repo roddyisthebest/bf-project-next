@@ -1,7 +1,6 @@
 import { ChaplesTable } from "@/components/custom/chaples-table";
-import { PostsTable } from "@/components/custom/posts-table";
 import { createClient } from "@/lib/supabase/server";
-import { ChapleView, PostView } from "@/types";
+import { ChapleView } from "@/types";
 
 type SearchParams = {
   q?: string;

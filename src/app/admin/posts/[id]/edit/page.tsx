@@ -1,5 +1,5 @@
 // app/admin/posts/[id]/edit/page.tsx
-import { PageProps, PostBody, PostView } from "@/types";
+import { PageProps, PostBody } from "@/types";
 import { PostForm } from "../../components/post-form";
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";

@@ -1,4 +1,4 @@
-import { ChapleType, PostType } from "@/enums";
+import { ChapleType, PostType, UserRole } from "@/enums";
 
 export interface PostBody {
   title: string;
@@ -35,3 +35,9 @@ export type PageProps = {
 export type PostTypePageProps = {
   params: Promise<{ type: PostType }>;
 };
+
+export interface Profile {
+  id: string;
+  role: UserRole;
+  name?: string;
+}

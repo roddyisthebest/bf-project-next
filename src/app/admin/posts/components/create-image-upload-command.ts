@@ -1,5 +1,5 @@
 // components/PostForm.tsx (핵심 변경 부분만)
-import MDEditor, { commands, ICommand } from "@uiw/react-md-editor";
+import { commands, ICommand } from "@uiw/react-md-editor";
 import { uploadPostImage } from "@/lib/apis/upload-image";
 
 // 툴바용 이미지 업로드 커맨드 (file input을 내부에서 생성/클릭)
