@@ -1,6 +1,6 @@
-// app/(whatever)/layout.tsx or 해당 레이아웃 파일
-
 import Header from "@/app/(web)/(main)/components/header/header";
+import ImageCarousel from "@/app/(web)/(main)/components/carousel/image-carousel";
+import Footer from "@/app/(web)/(main)/components/footer";
 
 export default async function MainLayout({
   children,
@@ -13,11 +13,11 @@ export default async function MainLayout({
       <div className="pointer-events-none absolute inset-0 [background:repeating-linear-gradient(0deg,rgba(16,185,129,0.035),rgba(16,185,129,0.035)_1px,transparent_1px,transparent_24px)] opacity-40" />
 
       <Header />
-      <div className="bg-primary h-64"></div>
-      <main className="relative z-10 px-36 max-xl:px-30 max-lg:px-18 max-md:px-6">
+      <ImageCarousel />
+      <main className="relative z-10 px-36 max-xl:px-6  max-md:px-4 ">
         {children}
       </main>
-      <footer className="h-24 bg-primary"></footer>
+      <Footer />
     </div>
   );
 }

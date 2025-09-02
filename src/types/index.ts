@@ -17,8 +17,8 @@ export interface PostView extends PostBody {
 export interface ChapleView extends ChapleBody {
   id: number;
   created_by: number;
-  created_at: number;
-  updated_at: number;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface ChapleBody {
@@ -30,4 +30,8 @@ export interface ChapleBody {
 
 export type PageProps = {
   params: Promise<{ id: string }>;
+};
+
+export type PostTypePageProps = {
+  params: Promise<{ type: PostType }>;
 };

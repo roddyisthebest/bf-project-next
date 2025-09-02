@@ -40,7 +40,7 @@ export default function EmailForm() {
       <Input
         type="email"
         placeholder="Email Address"
-        className="border h-auto py-4 px-3 mb-2 w-80"
+        className="border h-auto py-4 px-3 mb-2"
         onChange={(e) => setEmail(e.target.value)}
         value={email}
       />
