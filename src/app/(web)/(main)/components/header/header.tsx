@@ -24,13 +24,14 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { User as UserType } from "@supabase/supabase-js";
 import { useRouter, usePathname } from "next/navigation";
+import { UserRole } from "@/enums";
 
 export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [user, setUser] = useState<UserType | null>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<{ role: UserRole } | null>(null);
 
   const handleLogout = async () => {
     try {
@@ -74,6 +75,16 @@ export default function Header() {
       } = await supabase.auth.getUser();
 
       setUser(user);
+
+      if (user) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", user.id)
+          .single();
+        
+        setProfile(profile);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -124,7 +135,23 @@ export default function Header() {
                     {user?.user_metadata.name || user.email}
                   </div>
                   <div className="text-xs text-gray-600">{user.email}</div>
+                  {profile?.role && (
+                    <div className={`text-xs font-medium mt-1 px-2 py-1 rounded-full text-center ${
+                      profile.role === UserRole.Admin 
+                        ? 'bg-red-100 text-red-700' 
+                        : 'bg-blue-100 text-blue-700'
+                    }`}>
+                      {profile.role === UserRole.Admin ? '관리자' : '사용자'}
+                    </div>
+                  )}
                 </div>
+                {profile?.role === UserRole.Admin && (
+                  <DropdownMenuItem asChild>
+                    <Link href="/admin" className="cursor-pointer">
+                      관리자 페이지
+                    </Link>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuItem onClick={handleLogout}>
                   로그아웃
                 </DropdownMenuItem>
@@ -178,8 +205,27 @@ export default function Header() {
                         <div className="text-xs text-gray-600 truncate">
                           {user.email}
                         </div>
+                        {profile?.role && (
+                          <div className={`text-xs font-medium mt-1 px-2 py-1 rounded-full text-center ${
+                            profile.role === UserRole.Admin 
+                              ? 'bg-red-100 text-red-700' 
+                              : 'bg-blue-100 text-blue-700'
+                          }`}>
+                            {profile.role === UserRole.Admin ? '관리자' : '사용자'}
+                          </div>
+                        )}
                       </div>
                     </div>
+                    {profile?.role === UserRole.Admin && (
+                      <Link href="/admin" className="block mb-3">
+                        <Button 
+                          variant="outline" 
+                          className="w-full border-red-200 text-red-700 hover:bg-red-50 rounded-xl"
+                        >
+                          관리자 페이지
+                        </Button>
+                      </Link>
+                    )}
                     <LogoutButton />
                   </div>
                 ) : (
