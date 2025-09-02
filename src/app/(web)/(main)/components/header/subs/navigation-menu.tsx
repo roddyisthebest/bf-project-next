@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
   NavigationMenu,
@@ -11,15 +12,27 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { routes } from "@/app/(web)/(main)/consts";
+import { Route, routes } from "@/app/(web)/(main)/consts";
 
 export function NavigationMenuDemo() {
+  const pathname = usePathname();
+
+  const isActive = (route: Route) => {
+    return pathname.startsWith(route.href);
+  };
+
   return (
     <NavigationMenu viewport={false} className="z-[9999] max-md:hidden">
       <NavigationMenuList>
         {routes.map((route, idx) => (
           <NavigationMenuItem className="text-neutral" key={idx}>
-            <NavigationMenuTrigger className="bg-transparent">
+            <NavigationMenuTrigger
+              className={`bg-transparent transition-all duration-200 ${
+                isActive(route)
+                  ? "text-brand-600 bg-primary-50/50 font-medium  from-brand-50 to-brand-100/50 rounded-lg shadow-sm"
+                  : ""
+              }`}
+            >
               {route.title}
             </NavigationMenuTrigger>
             <NavigationMenuContent className="">
@@ -27,7 +40,16 @@ export function NavigationMenuDemo() {
                 <li>
                   {route.subRoutes?.map((subRoute, subIdx) => (
                     <NavigationMenuLink key={subIdx} asChild>
-                      <Link href={subRoute.href}>{subRoute.title}</Link>
+                      <Link
+                        href={subRoute.href}
+                        className={
+                          pathname === subRoute.href
+                            ? "text-brand-600 font-semibold"
+                            : ""
+                        }
+                      >
+                        {subRoute.title}
+                      </Link>
                     </NavigationMenuLink>
                   ))}
                 </li>

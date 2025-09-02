@@ -27,7 +27,7 @@ export const subRoutes = [
   },
 ];
 
-interface Route {
+export interface Route {
   title: string;
   href: string;
   subRoutes?: Route[];

@@ -183,14 +183,16 @@ export default function Header() {
                     <LogoutButton />
                   </div>
                 ) : (
-                  <Link href="/login">
-                    <Button
-                      variant="outline"
-                      className="border-brand-100 text-brand-600 hover:bg-brand-50 rounded-xl w-full"
-                    >
-                      로그인
-                    </Button>
-                  </Link>
+                  <DialogClose asChild>
+                    <Link href="/login">
+                      <Button
+                        variant="outline"
+                        className="border-brand-100 text-brand-600 hover:bg-brand-50 rounded-xl w-full"
+                      >
+                        로그인
+                      </Button>
+                    </Link>
+                  </DialogClose>
                 )}
               </div>
               <MobileNavigationMenu />
