@@ -1,4 +1,4 @@
-import { BookOpen } from "lucide-react";
+import { BookOpen, Church, MapPin, MessageCircle } from "lucide-react";
 
 export const subRoutes = [
   {
@@ -9,21 +9,21 @@ export const subRoutes = [
   },
   {
     id: 2,
-    icon: <BookOpen />,
+    icon: <Church />,
     label: "교회소개",
-    href: "/about/worship",
+    href: "/about",
   },
   {
     id: 3,
-    icon: <BookOpen />,
-    label: "교회소개",
-    href: "/about/worship",
+    icon: <MapPin />,
+    label: "오시는길",
+    href: "/about/location",
   },
   {
     id: 4,
-    icon: <BookOpen />,
-    label: "교회소개",
-    href: "/about/worship",
+    icon: <MessageCircle />,
+    label: "소통방",
+    href: "/boards/talk",
   },
 ];
 
