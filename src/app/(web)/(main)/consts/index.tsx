@@ -6,6 +6,7 @@ import {
   MapPin,
   MessageCircle,
   Users,
+  Globe,
 } from "lucide-react";
 
 export const subRoutes = [
@@ -259,4 +260,38 @@ export const churchFeatures = [
       "민족과 열방을 섬기는 '바로 그 교회'입니다.",
     ],
   },
+];
+
+export const domesticMissions = [
+  {
+    id: 1,
+    name: "장혜림",
+    image: "/domestic_1.png",
+    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다."
+  },
+  {
+    id: 2,
+    name: "배지민",
+    image: "/domestic_2.png",
+    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다."
+  }
+];
+
+export const internationalMissions = [
+  {
+    id: 1,
+    name: "호세 엔마뉴엘",
+    country: "엘살바도르",
+    countryFlag: "🇸🇻",
+    image: "/overseas_1.png",
+    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다."
+  },
+  {
+    id: 2,
+    name: "사뚜르쉬카",
+    country: "스리랑카",
+    countryFlag: "🇱🇰",
+    image: "/overseas_2.png",
+    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다."
+  }
 ];
