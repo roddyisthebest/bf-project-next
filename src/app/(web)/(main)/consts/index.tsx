@@ -152,7 +152,7 @@ export const timeTable = [
   },
   {
     title: "수요예배",
-    content: "수요일 오후 08:00",
+    content: "수요일 오후 07:30",
   },
   {
     title: "금요기도회",
@@ -160,7 +160,7 @@ export const timeTable = [
   },
   {
     title: "새벽기도회",
-    content: "월-목 오전 05:30",
+    content: "월-목 오전 05:00",
   },
 ];
 
