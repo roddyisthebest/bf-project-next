@@ -1,4 +1,12 @@
-import { BookOpen, Church, MapPin, MessageCircle } from "lucide-react";
+import {
+  BookOpen,
+  Church,
+  Compass,
+  Heart,
+  MapPin,
+  MessageCircle,
+  Users,
+} from "lucide-react";
 
 export const subRoutes = [
   {
@@ -41,6 +49,10 @@ export const routes: Route[] = [
       {
         title: "인사말",
         href: "/about",
+      },
+      {
+        title: "교회연혁",
+        href: "/about/history",
       },
       {
         title: "예배안내",
@@ -175,3 +187,76 @@ export const churchInfo = {
   phone: "031-665-2004",
   floor: "본당 2층",
 };
+
+export const churchMeaning = [
+  {
+    title: "큰",
+    description: [
+      "하나님의 은혜와 사랑이 너무 크고",
+      "우리를 향한 주님의 비전이 너무 커서…",
+    ],
+  },
+  {
+    title: "숲",
+    description: [
+      "그 누구나 회복과 쉼을 누리고,",
+      "민족과 세대와 열방 가운데 산소 같은 교회..",
+    ],
+  },
+];
+
+export const churchVision = [
+  { title: "전도", desc: "사람들을 그리스도께로 인도하고", icon: Heart },
+  { title: "훈련", desc: "주님을 만나고 닮아가도록 양육하며", icon: BookOpen },
+  { title: "사역", desc: "주님의 교회에서 헌신하고", icon: Users },
+  { title: "선교", desc: "세상과 열방의 빛으로 나아가", icon: Compass },
+  { title: "예배", desc: "주님께만 영광을 올려드리는", icon: Church },
+];
+
+export const churchFeatures = [
+  {
+    title: "생명있는 예배",
+    image: "/feature_01.png",
+    content: [
+      "건강한 그리스도인들의 살아있는 예배",
+      "하나님의 임재를 경험하는 예배",
+      "큰숲의 예배는 언제나 살아있습니다.",
+    ],
+  },
+  {
+    title: "사랑이 넘치는 교제",
+    image: "/feature_02.png",
+    content: [
+      "사랑방을 통한 성도들의 건강한 교제,",
+      "말씀을 나누고 행복을 나누는 교제,",
+      "행복이 넘치는 행복발전소입니다.",
+    ],
+  },
+  {
+    title: "변화가 있는 훈련",
+    image: "/feature_03.png",
+    content: [
+      "새가족반, 성장반, 제자훈련, 사역훈련 등",
+      "철저히 훈련하고 교육하는 교회,",
+      "평신도를 깨우고 평신도가 세워가는 교회",
+    ],
+  },
+  {
+    title: "신바람나는 봉사",
+    image: "/feature_04.png",
+    content: [
+      "소년소녀 가정들의 꿈을 심는 꿈나누기",
+      "하나님과 사람을 섬기는 주님의 나무가 되어",
+      "회복과 쉼을 위한 큰숲이 되어 드립니다.",
+    ],
+  },
+  {
+    title: "땅끝까지 나아가는 선교",
+    image: "/feature_05.png",
+    content: [
+      "한 사람의 영혼을 소중히 여기는 교회,",
+      "한국을 베이스캠프로 삼아",
+      "민족과 열방을 섬기는 '바로 그 교회'입니다.",
+    ],
+  },
+];
