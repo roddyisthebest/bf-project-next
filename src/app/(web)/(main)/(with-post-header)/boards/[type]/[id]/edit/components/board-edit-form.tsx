@@ -47,7 +47,9 @@ type PostFormValues = z.infer<typeof PostSchema>;
 
 const enumOptions = ((): string[] => {
   const vals = Object.values(PostType);
-  return vals.filter((v) => typeof v === "string" && v !== "image") as string[];
+  return vals.filter(
+    (v) => typeof v === "string" && v !== "image" && v !== "weekly"
+  ) as string[];
 })();
 
 export function BoardEditForm({
@@ -90,6 +92,7 @@ export function BoardEditForm({
       commands.checkedListCommand,
       commands.table,
       customImage,
+      commands.fullscreen,
     ];
   }, []);
 
@@ -139,9 +142,7 @@ export function BoardEditForm({
           onSubmit={form.handleSubmit(handleSubmit)}
           className="space-y-6 bg-white rounded-lg border border-gray-200 p-6 shadow-sm"
         >
-          <h1 className="text-2xl font-bold text-gray-900">
-            {submitText}
-          </h1>
+          <h1 className="text-2xl font-bold text-gray-900">{submitText}</h1>
 
           {/* Title */}
           <FormField

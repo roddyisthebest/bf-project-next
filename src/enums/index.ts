@@ -1,7 +1,8 @@
 export enum PostType {
-  Talk = "talk",
   Gallery = "gallery",
   Testimony = "testimony",
+  Weekly = "weekly",
+  Music = "music",
   Image = "image",
 }
 

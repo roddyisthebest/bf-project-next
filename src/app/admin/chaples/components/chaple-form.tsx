@@ -135,18 +135,12 @@ export function ChapleForm({
 
   return (
     <Form {...form}>
-      {/* CRT 느낌의 박스 */}
-      <div className="relative  border border-emerald-700/40 bg-[#0b0f0a] p-4 shadow-[0_0_32px_rgba(16,185,129,0.15)]">
-        {/* subtle scanlines */}
-        <div className="pointer-events-none absolute inset-0 mix-blend-overlay opacity-20 animate-scanlines [background:repeating-linear-gradient(0deg,rgba(255,255,255,0.06),rgba(255,255,255,0.06)_1px,transparent_1px,transparent_3px)]" />
-        {/* inner glow */}
-        <div className="pointer-events-none absolute inset-0 rounded-xl [box-shadow:inset_0_0_28px_rgba(16,185,129,0.12)]" />
-
+      <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
-          className="relative z-10 space-y-6"
+          className="space-y-6"
         >
-          <h1 className="text-2xl font-black tracking-tight text-emerald-200 drop-shadow-[0_0_16px_rgba(16,185,129,0.28)] animate-glow">
+          <h1 className="text-2xl font-bold text-gray-900">
             {submitText}
           </h1>
 
@@ -156,18 +150,15 @@ export function ChapleForm({
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-emerald-300">제목</FormLabel>
+                <FormLabel className="text-gray-700">제목</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="제목을 입력하세요"
                     {...field}
-                    className={clsx(
-                      "bg-emerald-950/30 border-emerald-800 text-emerald-50 placeholder:text-emerald-300/40",
-                      "focus-visible:ring-emerald-400 focus-visible:ring-offset-0"
-                    )}
+                    className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 focus-visible:ring-emerald-500 focus-visible:border-emerald-500"
                   />
                 </FormControl>
-                <FormMessage className="text-emerald-300/80" />
+                <FormMessage className="text-red-600" />
               </FormItem>
             )}
           />
@@ -178,7 +169,7 @@ export function ChapleForm({
             name="type"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-emerald-300">예배 유형</FormLabel>
+                <FormLabel className="text-gray-700">예배 유형</FormLabel>
                 <FormControl>
                   <Select
                     value={field.value}
@@ -186,16 +177,11 @@ export function ChapleForm({
                       field.onChange(val as unknown as ChapleType)
                     }
                   >
-                    <SelectTrigger
-                      className={clsx(
-                        "bg-emerald-950/30 border-emerald-800 text-emerald-50",
-                        "focus:ring-emerald-400"
-                      )}
-                    >
+                    <SelectTrigger className="bg-white border-gray-300 text-gray-900 focus:ring-emerald-500 focus:border-emerald-500">
                       <SelectValue placeholder="유형을 선택하세요" />
                     </SelectTrigger>
                     <SelectContent
-                      className="border-emerald-800 bg-[#0b0f0a] text-emerald-50"
+                      className="border-gray-200 bg-white text-gray-900"
                       position="popper"
                       sideOffset={4}
                     >
@@ -203,7 +189,7 @@ export function ChapleForm({
                         <SelectItem
                           key={opt}
                           value={opt}
-                          className="focus:bg-emerald-900/50 data-[highlighted]:bg-emerald-900/60"
+                          className="focus:bg-gray-100 data-[highlighted]:bg-gray-100"
                         >
                           {typeLabels?.[opt] ?? opt}
                         </SelectItem>
@@ -211,7 +197,7 @@ export function ChapleForm({
                     </SelectContent>
                   </Select>
                 </FormControl>
-                <FormMessage className="text-emerald-300/80" />
+                <FormMessage className="text-red-600" />
               </FormItem>
             )}
           />
@@ -222,18 +208,15 @@ export function ChapleForm({
             name="link"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-emerald-300">유튜브 링크</FormLabel>
+                <FormLabel className="text-gray-700">유튜브 링크</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="유튜브 링크를 입력하세요"
                     {...field}
-                    className={clsx(
-                      "bg-emerald-950/30 border-emerald-800 text-emerald-50 placeholder:text-emerald-300/40",
-                      "focus-visible:ring-emerald-400 focus-visible:ring-offset-0"
-                    )}
+                    className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 focus-visible:ring-emerald-500 focus-visible:border-emerald-500"
                   />
                 </FormControl>
-                <FormMessage className="text-emerald-300/80" />
+                <FormMessage className="text-red-600" />
               </FormItem>
             )}
           />
@@ -244,18 +227,15 @@ export function ChapleForm({
             name="verse"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-emerald-300">성경 구절</FormLabel>
+                <FormLabel className="text-gray-700">성경 구절</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="성경 구절을 입력하세요"
                     {...field}
-                    className={clsx(
-                      "bg-emerald-950/30 border-emerald-800 text-emerald-50 placeholder:text-emerald-300/40",
-                      "focus-visible:ring-emerald-400 focus-visible:ring-offset-0"
-                    )}
+                    className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 focus-visible:ring-emerald-500 focus-visible:border-emerald-500"
                   />
                 </FormControl>
-                <FormMessage className="text-emerald-300/80" />
+                <FormMessage className="text-red-600" />
               </FormItem>
             )}
           />
@@ -265,15 +245,12 @@ export function ChapleForm({
             <Button
               type="submit"
               disabled={loading || deleting}
-              className={clsx(
-                "relative bg-emerald-600 text-white hover:bg-emerald-500",
-                "shadow-[0_0_16px_rgba(16,185,129,0.25)] hover:shadow-[0_0_24px_rgba(16,185,129,0.35)]"
-              )}
+              className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-emerald-500"
             >
               {loading ? (
                 <span className="inline-flex items-center gap-2">
                   <Loader className="h-4 w-4 animate-spin" />
-                  Saving…
+                  저장 중…
                 </span>
               ) : (
                 submitText
@@ -284,18 +261,15 @@ export function ChapleForm({
                 type="button"
                 disabled={loading || deleting}
                 onClick={handleDelete}
-                className={clsx(
-                  "relative bg-emerald-600 text-white hover:bg-emerald-500",
-                  "shadow-[0_0_16px_rgba(16,185,129,0.25)] hover:shadow-[0_0_24px_rgba(16,185,129,0.35)]"
-                )}
+                className="bg-red-600 text-white hover:bg-red-700 focus:ring-red-500"
               >
                 {deleting ? (
                   <span className="inline-flex items-center gap-2">
                     <Loader className="h-4 w-4 animate-spin" />
-                    Deleting...
+                    삭제 중...
                   </span>
                 ) : (
-                  "Delete"
+                  "삭제"
                 )}
               </Button>
             )}
@@ -305,9 +279,9 @@ export function ChapleForm({
               variant="outline"
               onClick={() => form.reset()}
               disabled={loading || deleting}
-              className="border-emerald-700/60 bg-transparent text-emerald-200 hover:bg-emerald-900/30"
+              className="border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
             >
-              Reset
+              초기화
             </Button>
           </div>
         </form>

@@ -36,7 +36,6 @@ const formatDateTime = (v: string | number | Date | null | undefined) => {
 const typeLabel = (t: PostType | null | undefined) => {
   if (!t) return "분류 없음";
   const map: Partial<Record<string, string>> = {
-    BOARD: "소통방",
     GALLERY: "사진/갤러리",
     TESTIMONY: "은혜 나눔터",
   };
@@ -191,7 +190,9 @@ export function PostDetail({ post }: { post: PostView }) {
                 />
               </div>
             ),
-            code: (props: React.HTMLAttributes<HTMLElement> & { inline?: boolean }) => {
+            code: (
+              props: React.HTMLAttributes<HTMLElement> & { inline?: boolean }
+            ) => {
               const { inline, children, ...rest } = props;
               return inline ? (
                 <code

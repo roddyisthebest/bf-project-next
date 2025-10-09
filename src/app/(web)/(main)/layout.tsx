@@ -13,6 +13,7 @@ export default async function MainLayout({
       <div className="pointer-events-none absolute inset-0 [background:repeating-linear-gradient(0deg,rgba(16,185,129,0.035),rgba(16,185,129,0.035)_1px,transparent_1px,transparent_24px)] opacity-40" />
 
       <Header />
+      {/* 이미지 슬라이드 필요할때 사용 */}
       <ImageCarousel />
       <main className="relative z-10 px-36 max-xl:px-6  max-md:px-4 ">
         {children}

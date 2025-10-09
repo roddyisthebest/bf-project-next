@@ -50,9 +50,9 @@ export default async function PostsPage({
     // 실패 시 빈 목록 전달 (필요시 에러 핸들링 UI)
     return (
       <div className="px-4 pb-4">
-        <h1 className="text-2xl font-semibold">Posts</h1>
+        <h1 className="text-2xl font-semibold">게시글 관리</h1>
         <p className="mt-4 text-sm text-red-600">
-          Failed to load posts: {error.message}
+          게시글을 불러오는데 실패했습니다: {error.message}
         </p>
       </div>
     );
@@ -63,7 +63,7 @@ export default async function PostsPage({
 
   return (
     <div className="px-4 pb-4">
-      <h1 className="text-2xl font-semibold">Posts</h1>
+      <h1 className="text-2xl font-semibold">게시글 관리</h1>
       <div className="flex flex-1 w-full">
         <PostsTable
           initialRows={rows}

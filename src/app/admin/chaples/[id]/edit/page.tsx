@@ -46,7 +46,7 @@ export default async function EditChaplePage({ params }: PageProps) {
     <ChapleForm
       initialValues={chaple}
       onSubmit={update}
-      submitText="Update Chaple"
+      submitText="예배 수정"
       chapleId={chapleId}
     />
   );

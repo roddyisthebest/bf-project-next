@@ -29,5 +29,13 @@ export default function NewPostPage() {
     return postId;
   }
 
-  return <PostForm onSubmit={create} submitText="Create Post" />;
+  const typeLabels = {
+    gallery: "갤러리",
+    testimony: "은혜나눔터",
+    music: "찬양",
+    weekly: "주보",
+    talk: "소통방",
+  };
+
+  return <PostForm onSubmit={create} submitText="게시글 작성" typeLabels={typeLabels} />;
 }
