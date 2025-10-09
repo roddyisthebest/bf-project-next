@@ -31,7 +31,6 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
-import clsx from "clsx";
 import { createClient } from "@/lib/supabase/client";
 
 const ChapleSchema = z.object({

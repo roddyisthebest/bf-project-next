@@ -34,7 +34,6 @@ import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
-import clsx from "clsx";
 import { ImageResizeHandler } from "@/components/ui/image-resize-handler";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
