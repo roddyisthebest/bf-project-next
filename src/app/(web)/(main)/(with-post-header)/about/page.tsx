@@ -1,7 +1,6 @@
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Heart, Users, BookOpen, Compass, Church, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { churchFeatures, churchMeaning, churchVision } from "../../consts";
 import Image from "next/image";
 
@@ -58,7 +57,7 @@ export default function AboutPage() {
                   <div className="flex items-start gap-4">
                     <div className="w-2 h-2 bg-emerald-500 rounded-full mt-3 flex-shrink-0"></div>
                     <p className="text-gray-700 leading-relaxed">
-                      '왜 이렇게 살아야 하는지?' 알 수만 있다면..
+                      &lsquo;왜 이렇게 살아야 하는지?&rsquo; 알 수만 있다면..
                     </p>
                   </div>
                   <div className="flex items-start gap-4">
@@ -81,7 +80,7 @@ export default function AboutPage() {
                   2006년 봄, 큰숲교회가 시작된 이후
                 </h3>
                 <p className="mb-4 leading-relaxed">
-                  저희들은 불가능할 것 같았던 질문에 대해 'yes'라는 답을 가지게 되었습니다.
+                  저희들은 불가능할 것 같았던 질문에 대해 &lsquo;yes&rsquo;라는 답을 가지게 되었습니다.
                 </p>
                 <div className="text-xl font-bold">
                   <p>삶을 맛깔나게 하는</p>

@@ -3,19 +3,15 @@
 import { Label } from "@/components/ui/label";
 import { useEffect } from "react";
 
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
-
 export default function MapSection() {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (typeof window === "undefined") return;
-      if (!window.kakao) return;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (!(window as any).kakao) return;
 
-      const kakao = window.kakao;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const kakao = (window as any).kakao;
       kakao.maps.load(() => {
         const container = document.getElementById("map");
         if (!container) return;

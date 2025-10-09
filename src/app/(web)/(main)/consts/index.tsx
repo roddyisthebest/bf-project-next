@@ -6,7 +6,6 @@ import {
   MapPin,
   MessageCircle,
   Users,
-  Globe,
 } from "lucide-react";
 
 export const subRoutes = [
