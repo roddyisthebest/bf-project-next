@@ -7,17 +7,17 @@ export const adminRoutes = [
     icon: ArrowLeft,
   },
   {
-    title: "Admin Home",
+    title: "관리자 홈",
     url: "/admin",
     icon: Home,
   },
   {
-    title: "Posts",
+    title: "게시글 관리",
     url: "/admin/posts",
     icon: NotebookPen,
   },
   {
-    title: "Chaples",
+    title: "예배 관리",
     url: "/admin/chaples",
     icon: Church,
   },

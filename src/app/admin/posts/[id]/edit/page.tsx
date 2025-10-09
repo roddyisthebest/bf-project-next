@@ -51,6 +51,6 @@ export default async function EditPostPage({ params }: PageProps) {
   };
 
   return (
-    <PostForm initialValues={post} onSubmit={update} submitText="Update Post" typeLabels={typeLabels} />
+    <PostForm initialValues={post} onSubmit={update} submitText="게시글 수정" typeLabels={typeLabels} />
   );
 }

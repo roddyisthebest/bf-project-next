@@ -37,5 +37,5 @@ export default function NewPostPage() {
     talk: "소통방",
   };
 
-  return <PostForm onSubmit={create} submitText="Create Post" typeLabels={typeLabels} />;
+  return <PostForm onSubmit={create} submitText="게시글 작성" typeLabels={typeLabels} />;
 }

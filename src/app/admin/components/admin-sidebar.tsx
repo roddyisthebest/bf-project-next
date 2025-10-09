@@ -21,7 +21,7 @@ export function AdminSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel>관리 메뉴</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {adminRoutes.map((route) => {

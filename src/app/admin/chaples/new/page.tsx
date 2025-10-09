@@ -26,5 +26,5 @@ export default function NewChaplePage() {
     return chapleId;
   }
 
-  return <ChapleForm onSubmit={create} submitText="Create Chaple" />;
+  return <ChapleForm onSubmit={create} submitText="예배 등록" />;
 }
