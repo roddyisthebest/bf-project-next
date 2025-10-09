@@ -42,7 +42,15 @@ export default async function EditPostPage({ params }: PageProps) {
     // 성공적으로 생성된 후 리다이렉트 (예: 상세 페이지로)
     return updatedPostId;
   }
+  const typeLabels = {
+    gallery: "갤러리",
+    testimony: "은혜나눔터",
+    music: "찬양",
+    weekly: "주보",
+    talk: "소통방",
+  };
+
   return (
-    <PostForm initialValues={post} onSubmit={update} submitText="Update Post" />
+    <PostForm initialValues={post} onSubmit={update} submitText="Update Post" typeLabels={typeLabels} />
   );
 }

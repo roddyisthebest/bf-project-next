@@ -108,10 +108,17 @@ export function BoardsTable({
     page < pageCount &&
     pushWithParams({ title, sort, page: page + 1, pageSize });
 
-  const getDetailPath = (post: PostView) =>
-    isAdmin
-      ? `/admin/boards/${post.id}/edit`
-      : `/boards/${post.type}/${post.id}/detail`;
+  const getDetailPath = (post: PostView) => {
+    if (isAdmin) {
+      return `/admin/boards/${post.id}/edit`;
+    }
+    if (post.type === 'weekly') {
+      return `/chaples/weekly/${post.id}/detail`;
+    }
+    return `/boards/${post.type}/${post.id}/detail`;
+  };
+
+  const isWeeklyPage = pathname?.includes('/chaples/weekly');
 
   return (
     <div className="w-full">
@@ -143,7 +150,7 @@ export function BoardsTable({
           </DropdownMenuContent>
         </DropdownMenu>
 
-        {user && (
+        {user && !isWeeklyPage && (
           <Button asChild className="ml-2">
             <Link href="/boards/new">글쓰기</Link>
           </Button>

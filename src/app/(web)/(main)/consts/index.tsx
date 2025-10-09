@@ -31,8 +31,8 @@ export const subRoutes = [
   {
     id: 4,
     icon: <MessageCircle />,
-    label: "소통방",
-    href: "/boards/talk",
+    label: "은혜나눔터",
+    href: "/boards/testimony",
   },
 ];
 
@@ -80,6 +80,10 @@ export const routes: Route[] = [
       {
         title: "금요기도회",
         href: "/chaples/friday",
+      },
+      {
+        title: "주보",
+        href: "/chaples/weekly",
       },
     ],
   },
@@ -142,16 +146,16 @@ export const routes: Route[] = [
     href: "/boards",
     subRoutes: [
       {
-        title: "소통방",
-        href: "/boards/talk",
-      },
-      {
         title: "사진/갤러리",
         href: "/boards/gallery",
       },
       {
         title: "은혜 나눔터",
         href: "/boards/testimony",
+      },
+      {
+        title: "찬양",
+        href: "/boards/music",
       },
     ],
   },
@@ -267,14 +271,14 @@ export const domesticMissions = [
     id: 1,
     name: "장혜림",
     image: "/domestic_1.png",
-    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다."
+    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다.",
   },
   {
     id: 2,
     name: "배지민",
     image: "/domestic_2.png",
-    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다."
-  }
+    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다.",
+  },
 ];
 
 export const internationalMissions = [
@@ -284,7 +288,7 @@ export const internationalMissions = [
     country: "엘살바도르",
     countryFlag: "🇸🇻",
     image: "/overseas_1.png",
-    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다."
+    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다.",
   },
   {
     id: 2,
@@ -292,6 +296,6 @@ export const internationalMissions = [
     country: "스리랑카",
     countryFlag: "🇱🇰",
     image: "/overseas_2.png",
-    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다."
-  }
+    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다.",
+  },
 ];

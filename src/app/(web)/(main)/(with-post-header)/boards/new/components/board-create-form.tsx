@@ -32,6 +32,7 @@ import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { ImageResizeHandler } from "@/components/ui/image-resize-handler";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
 
@@ -46,7 +47,9 @@ type PostFormValues = z.infer<typeof PostSchema>;
 
 const enumOptions = ((): string[] => {
   const vals = Object.values(PostType);
-  return vals.filter((v) => typeof v === "string" && v !== "image") as string[];
+  return vals.filter(
+    (v) => typeof v === "string" && v !== "image" && v !== "weekly"
+  ) as string[];
 })();
 
 export function BoardCreateForm({
@@ -87,6 +90,7 @@ export function BoardCreateForm({
       commands.checkedListCommand,
       commands.table,
       customImage,
+      commands.fullscreen,
     ];
   }, []);
 
@@ -128,9 +132,7 @@ export function BoardCreateForm({
           onSubmit={form.handleSubmit(handleSubmit)}
           className="space-y-6 bg-white rounded-lg border border-gray-200 p-6 shadow-sm"
         >
-          <h1 className="text-2xl font-bold text-gray-900">
-            {submitText}
-          </h1>
+          <h1 className="text-2xl font-bold text-gray-900">{submitText}</h1>
 
           {/* Title */}
           <FormField
@@ -192,7 +194,7 @@ export function BoardCreateForm({
                 <FormControl>
                   <div
                     data-color-mode="light"
-                    className="rounded-md border border-gray-300"
+                    className="rounded-md border border-gray-300 image-resize-editor"
                   >
                     <MDEditor
                       value={field.value}
@@ -235,6 +237,7 @@ export function BoardCreateForm({
             </Button>
           </div>
         </form>
+        <ImageResizeHandler />
       </div>
     </Form>
   );

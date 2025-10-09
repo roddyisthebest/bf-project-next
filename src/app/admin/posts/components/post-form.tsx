@@ -35,6 +35,7 @@ import { toast } from "sonner";
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
+import { ImageResizeHandler } from "@/components/ui/image-resize-handler";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
 
@@ -92,6 +93,7 @@ export function PostForm({
       commands.checkedListCommand,
       commands.table,
       customImage,
+      commands.fullscreen,
     ];
   }, []);
 
@@ -227,7 +229,7 @@ export function PostForm({
                 <FormControl>
                   <div
                     data-color-mode="dark"
-                    className="rounded-md border border-emerald-800 bg-emerald-950/20 p-2"
+                    className="rounded-md border border-emerald-800 bg-emerald-950/20 p-2 image-resize-editor"
                   >
                     <MDEditor
                       value={field.value}
@@ -275,6 +277,7 @@ export function PostForm({
             </Button>
           </div>
         </form>
+        <ImageResizeHandler />
       </div>
     </Form>
   );
