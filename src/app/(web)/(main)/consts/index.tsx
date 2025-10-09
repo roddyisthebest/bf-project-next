@@ -179,6 +179,10 @@ export const timeTable = [
     title: "새벽기도회",
     content: "월-목 오전 05:00",
   },
+  // {
+  //   title: "청년부 모임",
+  //   content: "주일 오후 1:00",
+  // },
 ];
 
 export const locationCoordinate = {
