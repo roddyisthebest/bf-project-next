@@ -157,12 +157,12 @@ export const routes: Route[] = [
         title: "찬양",
         href: "/boards/music",
       },
-      {
-        title: "네이버 밴드",
-        href: "https://band.us/band/5513842",
-        absolutable: true,
-      },
     ],
+  },
+  {
+    title: "네이버 밴드",
+    href: "https://band.us/n/a4aeb6N041c3e",
+    absolutable: true,
   },
 ];
 
