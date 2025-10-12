@@ -1,23 +1,36 @@
 export function toEmbedUrl(link: string | undefined): string {
   if (!link) return "";
 
-  // 1) watch?v= 형태
-  if (link.includes("watch?v=")) {
-    return link.replace("watch?v=", "embed/");
-  }
+  // YouTube 비디오 ID 추출 함수
+  const extractVideoId = (url: string): string | null => {
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=)([^&\n?#]+)/,
+      /(?:youtube\.com\/embed\/)([^&\n?#]+)/,
+      /(?:youtu\.be\/)([^&\n?#]+)/,
+      /(?:youtube\.com\/v\/)([^&\n?#]+)/,
+      /(?:youtube\.com\/live\/)([^&\n?#]+)/,
+    ];
 
-  // 2) youtu.be 단축링크
-  if (link.includes("youtu.be/")) {
-    const videoId = link.split("youtu.be/")[1].split("?")[0];
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match && match[1]) {
+        return match[1];
+      }
+    }
+    return null;
+  };
+
+  const videoId = extractVideoId(link);
+  if (videoId) {
     return `https://www.youtube.com/embed/${videoId}`;
   }
 
-  // 3) 이미 embed 링크인 경우 그대로
-  if (link.includes("embed/")) {
+  // 이미 올바른 embed URL인 경우
+  if (link.includes("youtube.com/embed/")) {
     return link;
   }
 
-  return link;
+  return "";
 }
 
 export function formatDate(date: string | null | undefined) {

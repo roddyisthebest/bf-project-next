@@ -47,7 +47,11 @@ export default async function SermonSection() {
           <p className="text-neutral text-lg font-medium">주일예배</p>
         </div>
         <Link href="/chaples/sunday">
-          <Button variant="ghost" size="sm" className="text-primary hover:text-primary-600">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-primary hover:text-primary-600"
+          >
             <span className="max-md:hidden">더보기</span>
             <ArrowRight className="ml-1 h-4 w-4 max-md:ml-0" />
           </Button>
