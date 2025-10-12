@@ -191,7 +191,7 @@ export const locationCoordinate = {
 
 export const churchInfo = {
   name: "큰숲교회",
-  address: "경기도 평택시 장당동 123-45",
+  address: "경기도 평택시 장당길 59(장당동)",
   phone: "031-665-2004",
   floor: "본당 2층",
 };
