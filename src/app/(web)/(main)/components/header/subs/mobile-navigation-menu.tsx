@@ -20,7 +20,7 @@ export function MobileNavigationMenu() {
   };
 
   const getDefaultValue = () => {
-    const activeRouteIndex = routes.findIndex(route => isActive(route));
+    const activeRouteIndex = routes.findIndex((route) => isActive(route));
     return activeRouteIndex !== -1 ? `${activeRouteIndex}` : undefined;
   };
 
@@ -43,16 +43,30 @@ export function MobileNavigationMenu() {
           <AccordionContent className="flex flex-col gap-4 text-balance bg-primary-50/80 p-4 rounded-t-md">
             {route.subRoutes?.map((subRoute, subRouteIdx) => (
               <DialogClose key={subRouteIdx} asChild>
-                <Link
-                  href={subRoute.href}
-                  className={`text-emerald-800 hover:underline ${
-                    pathname === subRoute.href
-                      ? "font-semibold text-brand-600"
-                      : ""
-                  }`}
-                >
-                  {subRoute.title}
-                </Link>
+                {subRoute.absolutable ? (
+                  <a
+                    href={subRoute.href}
+                    className={`text-emerald-800 hover:underline ${
+                      pathname === subRoute.href
+                        ? "font-semibold text-brand-600"
+                        : ""
+                    }`}
+                    target="_blank"
+                  >
+                    {subRoute.title}
+                  </a>
+                ) : (
+                  <Link
+                    href={subRoute.href}
+                    className={`text-emerald-800 hover:underline ${
+                      pathname === subRoute.href
+                        ? "font-semibold text-brand-600"
+                        : ""
+                    }`}
+                  >
+                    {subRoute.title}
+                  </Link>
+                )}
               </DialogClose>
             ))}
           </AccordionContent>

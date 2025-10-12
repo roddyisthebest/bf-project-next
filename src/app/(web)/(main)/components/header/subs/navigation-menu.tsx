@@ -40,16 +40,30 @@ export function NavigationMenuDemo() {
                 <li>
                   {route.subRoutes?.map((subRoute, subIdx) => (
                     <NavigationMenuLink key={subIdx} asChild>
-                      <Link
-                        href={subRoute.href}
-                        className={
-                          pathname === subRoute.href
-                            ? "text-brand-600 font-semibold"
-                            : ""
-                        }
-                      >
-                        {subRoute.title}
-                      </Link>
+                      {subRoute.absolutable ? (
+                        <a
+                          href={subRoute.href}
+                          className={
+                            pathname === subRoute.href
+                              ? "text-brand-600 font-semibold"
+                              : ""
+                          }
+                          target="_blank"
+                        >
+                          {subRoute.title}
+                        </a>
+                      ) : (
+                        <Link
+                          href={subRoute.href}
+                          className={
+                            pathname === subRoute.href
+                              ? "text-brand-600 font-semibold"
+                              : ""
+                          }
+                        >
+                          {subRoute.title}
+                        </Link>
+                      )}
                     </NavigationMenuLink>
                   ))}
                 </li>

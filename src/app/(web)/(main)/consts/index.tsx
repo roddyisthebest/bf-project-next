@@ -39,6 +39,7 @@ export interface Route {
   title: string;
   href: string;
   subRoutes?: Route[];
+  absolutable?: boolean;
 }
 
 export const routes: Route[] = [
@@ -155,6 +156,11 @@ export const routes: Route[] = [
       {
         title: "찬양",
         href: "/boards/music",
+      },
+      {
+        title: "네이버 밴드",
+        href: "https://band.us/band/5513842",
+        absolutable: true,
       },
     ],
   },
