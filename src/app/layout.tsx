@@ -19,7 +19,8 @@ export const metadata: Metadata = {
     default: "큰숲교회",
     template: "%s | 큰숲교회",
   },
-  description: "큰숲교회는 하나님의 말씀을 중심으로 한 건강한 교회 공동체입니다.",
+  description:
+    "큰숲교회는 하나님의 말씀을 중심으로 한 건강한 교회 공동체입니다.",
   keywords: "큰숲교회, 교회, 예배, 기독교, 주일예배, 수요예배",
   authors: [{ name: "큰숲교회" }],
   creator: "큰숲교회",
@@ -29,9 +30,11 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  ),
   alternates: {
-    canonical: '/',
+    canonical: "/",
   },
   robots: {
     index: true,
@@ -39,14 +42,13 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
-  verification: {
-    // google: 'your-google-verification-code',
-    // naver: 'your-naver-verification-code',
+  other: {
+    "naver-site-verification": "fa5378357429bd11bedf8a1bae321bc9923cd8e4",
   },
 };
 

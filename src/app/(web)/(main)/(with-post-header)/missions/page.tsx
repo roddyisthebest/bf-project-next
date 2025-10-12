@@ -37,6 +37,12 @@ export default function MissionsPage() {
                   <h3 className="text-2xl font-bold text-gray-900">
                     {child.name}
                   </h3>
+                  {child.country && (
+                    <div className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded-full">
+                      <span className="text-lg">{child.countryFlag}</span>
+                      <span className="text-sm text-gray-600 font-medium">{child.country}</span>
+                    </div>
+                  )}
                 </div>
                 <p className="text-gray-600 leading-relaxed text-lg">{child.description}</p>
                 <div className="mt-6 pt-6 border-t border-gray-100">

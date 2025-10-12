@@ -46,7 +46,13 @@ export function PostHeader() {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href={subRoute.href}>{subRoute.title}</Link>
+                  {subRoute.absolutable ? (
+                    <a target="_blank" href={subRoute.href}>
+                      {subRoute.title}
+                    </a>
+                  ) : (
+                    <Link href={subRoute.href}>{subRoute.title}</Link>
+                  )}
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </>

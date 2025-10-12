@@ -115,7 +115,7 @@ export default function Header() {
           <NavigationMenuDemo />
         </div>
 
-        <nav className="flex items-center flex-1 justify-end gap-2 max-md:hidden">
+        <nav className="flex items-center flex-1 justify-end gap-2 max-[840px]:hidden">
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -172,7 +172,7 @@ export default function Header() {
         </nav>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="ghost" className="hidden max-md:block">
+            <Button variant="ghost" className="hidden max-[840px]:block">
               <Menu />
             </Button>
           </DialogTrigger>
