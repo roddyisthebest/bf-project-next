@@ -276,7 +276,6 @@ export const domesticMissions = [
     country: "대한민국",
     countryFlag: "🇰🇷",
     image: "/domestic_1.png",
-    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다.",
   },
   {
     id: 2,
@@ -284,7 +283,6 @@ export const domesticMissions = [
     country: "대한민국",
     countryFlag: "🇰🇷",
     image: "/domestic_2.png",
-    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다.",
   },
   {
     id: 3,
@@ -292,7 +290,6 @@ export const domesticMissions = [
     country: "엘살바도르",
     countryFlag: "🇸🇻",
     image: "/overseas_1.png",
-    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다.",
   },
   {
     id: 4,
@@ -300,7 +297,6 @@ export const domesticMissions = [
     country: "스리랑카",
     countryFlag: "🇱🇰",
     image: "/overseas_2.png",
-    description: "큰숲교회에서 후원하고 있는 소중한 아이입니다.",
   },
 ];
 

@@ -25,16 +25,18 @@ export default function InternationalMissionsPage() {
               <div className="aspect-[4/3] relative overflow-hidden">
                 {child.images && child.images.length > 0 ? (
                   child.images.length === 1 ? (
-                    <Image
-                      src={child.images[0]}
-                      alt={child.name}
-                      fill
-                      className="object-contain group-hover:scale-105 transition-transform duration-300"
-                    />
+                    <div className="relative h-full bg-gradient-to-br from-gray-50 to-gray-100">
+                      <Image
+                        src={child.images[0]}
+                        alt={child.name}
+                        fill
+                        className="object-contain group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
                   ) : (
                     <div className="grid grid-cols-2 gap-1 h-full">
                       {child.images.slice(0, 4).map((image, idx) => (
-                        <div key={idx} className="relative overflow-hidden">
+                        <div key={idx} className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                           <Image
                             src={image}
                             alt={`${child.name} ${idx + 1}`}
@@ -46,8 +48,8 @@ export default function InternationalMissionsPage() {
                     </div>
                   )
                 ) : (
-                  <div className="flex items-center justify-center h-full bg-gray-100">
-                    <Globe className="w-16 h-16 text-gray-400" />
+                  <div className="flex items-center justify-center h-full bg-gradient-to-br from-blue-100 to-emerald-100">
+                    <Globe className="w-16 h-16 text-blue-400" />
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
