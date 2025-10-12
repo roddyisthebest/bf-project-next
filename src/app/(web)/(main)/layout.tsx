@@ -1,6 +1,7 @@
 import Header from "@/app/(web)/(main)/components/header/header";
 import ImageCarousel from "@/app/(web)/(main)/components/carousel/image-carousel";
 import Footer from "@/app/(web)/(main)/components/footer";
+import { ScrollToTop } from "@/components/scroll-to-top";
 
 export default async function MainLayout({
   children,
@@ -12,6 +13,7 @@ export default async function MainLayout({
       <div className="pointer-events-none absolute inset-0 [background:repeating-linear-gradient(90deg,rgba(16,185,129,0.045),rgba(16,185,129,0.045)_1px,transparent_1px,transparent_24px)] opacity-40" />
       <div className="pointer-events-none absolute inset-0 [background:repeating-linear-gradient(0deg,rgba(16,185,129,0.035),rgba(16,185,129,0.035)_1px,transparent_1px,transparent_24px)] opacity-40" />
 
+      <ScrollToTop />
       <Header />
       {/* 이미지 슬라이드 필요할때 사용 */}
       <ImageCarousel />
