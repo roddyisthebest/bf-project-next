@@ -17,7 +17,10 @@ export default function LocationPage() {
       const container = document.getElementById("map");
       if (!container) return;
 
-      const position = new kakao.maps.LatLng(locationCoordinate.x, locationCoordinate.y);
+      const position = new kakao.maps.LatLng(
+        locationCoordinate.x,
+        locationCoordinate.y
+      );
       const options = {
         center: position,
         level: 3,
@@ -41,8 +44,8 @@ export default function LocationPage() {
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       <div className="text-center mb-8">
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          큰숲교회로 오시는 길을 안내해드립니다. 궁금한 사항이 있으시면 언제든지
-          연락해 주세요.
+          큰숲교회로 오시는 길을 안내해드립니다. <br /> 궁금한 사항이 있으시면
+          언제든지 연락해 주세요.
         </p>
       </div>
 
@@ -80,7 +83,9 @@ export default function LocationPage() {
                 <div className="text-lg font-semibold text-gray-900">
                   {churchInfo.address}
                 </div>
-                <div className="text-sm text-gray-600">{churchInfo.name} ({churchInfo.floor})</div>
+                <div className="text-sm text-gray-600">
+                  {churchInfo.name} ({churchInfo.floor})
+                </div>
                 <Button
                   variant="outline"
                   size="sm"
@@ -135,35 +140,8 @@ export default function LocationPage() {
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">네비게이션</h4>
               <p className="text-sm text-gray-600">
-                &quot;{churchInfo.name}&quot; 또는 &quot;{churchInfo.address}&quot;로 검색하세요.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Bus className="h-5 w-5 text-primary" />
-              대중교통 이용시
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">버스 이용</h4>
-              <div className="flex flex-wrap gap-2 mb-2">
-                <Badge variant="outline">1번</Badge>
-                <Badge variant="outline">5번</Badge>
-                <Badge variant="outline">7번</Badge>
-              </div>
-              <p className="text-sm text-gray-600">
-                장당동 정류장 하차 후 도보 5분
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">지하철</h4>
-              <p className="text-sm text-gray-600">
-                평택역에서 버스 환승 또는 택시 이용 (약 10분 소요)
+                &quot;{churchInfo.name}&quot; 또는 &quot;{churchInfo.address}
+                &quot;로 검색하세요.
               </p>
             </div>
           </CardContent>
