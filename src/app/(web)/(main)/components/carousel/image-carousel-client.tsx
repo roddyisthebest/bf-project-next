@@ -43,17 +43,27 @@ export function ImageCarouselClient({ posts }: ImageCarouselClientProps) {
       <CarouselContent>
         {posts.map((post) => (
           <CarouselItem key={post.id}>
-            <div className="relative h-48 sm:h-64 overflow-hidden bg-gray-900">
+            <div className="relative h-48 sm:h-64 overflow-hidden">
               {post.thumbnail && (
-                <Image
-                  fill
-                  src={post.thumbnail}
-                  alt={post.title}
-                  className="object-cover"
-                  quality={90}
-                  sizes="100vw"
-                  priority
-                />
+                <>
+                  <Image
+                    fill
+                    src={post.thumbnail}
+                    alt=""
+                    className="object-cover blur-sm opacity-50"
+                    quality={50}
+                    sizes="100vw"
+                  />
+                  <Image
+                    fill
+                    src={post.thumbnail}
+                    alt={post.title}
+                    className="object-contain relative z-10"
+                    quality={90}
+                    sizes="100vw"
+                    priority
+                  />
+                </>
               )}
             </div>
           </CarouselItem>
