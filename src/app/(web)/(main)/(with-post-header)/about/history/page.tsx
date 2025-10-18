@@ -19,7 +19,6 @@ import {
   RotateCcw,
   Gift,
   Users2,
-  Hands,
 } from "lucide-react";
 
 const churchHistory = [
