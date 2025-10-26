@@ -87,10 +87,7 @@ export default async function BoardDetailPage({ params }: PageProps) {
       </div>
       <div className="px-6 pb-6">
         <div className="prose prose-lg max-w-none print-only-content">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            // className="markdown-content"
-          >
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {post.content || "내용이 없습니다."}
           </ReactMarkdown>
         </div>

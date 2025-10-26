@@ -33,6 +33,13 @@ const formatDate = (v: string | number | Date) =>
     day: "2-digit",
   }).format(new Date(v));
 
+const typeLabels: Record<string, string> = {
+  gallery: "사진/갤러리",
+  testimony: "은혜 나눔터",
+  music: "찬양",
+  weekly: "주보",
+};
+
 export function BoardsTable({
   initialRows,
   total,
@@ -185,8 +192,8 @@ export function BoardsTable({
                       <span className="font-medium">{r.title}</span>
                     </TableCell>
                     <TableCell>
-                      <span className="uppercase text-xs tracking-wide">
-                        {r.type ?? "-"}
+                      <span className="text-xs tracking-wide">
+                        {r.type ? typeLabels[r.type] || r.type : "-"}
                       </span>
                     </TableCell>
                     <TableCell className="text-sm text-muted-foreground">

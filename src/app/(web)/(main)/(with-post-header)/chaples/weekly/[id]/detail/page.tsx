@@ -7,6 +7,8 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { PrintButton } from "../../../../boards/[type]/[id]/detail/components/print-button";
+import { PDFViewer } from "@/components/ui/pdf-viewer";
+import React from "react";
 
 export default async function WeeklyDetailPage({ params }: PageProps) {
   const { id } = await params;
@@ -64,7 +66,64 @@ export default async function WeeklyDetailPage({ params }: PageProps) {
       </div>
       <div className="px-6 pb-6">
         <div className="prose prose-lg max-w-none print-only-content">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              p: ({ children, ...props }) => {
+                // p 태그 내부에 PDF 링크가 있는지 확인
+                const hasFileLink = React.Children.toArray(children).some(
+                  (child: any) => {
+                    return (
+                      child?.props?.href &&
+                      /\.(pdf|doc|docx|xls|xlsx|ppt|pptx)$/i.test(
+                        child.props.href
+                      )
+                    );
+                  }
+                );
+
+                // PDF 링크가 있으면 div로 렌더링
+                if (hasFileLink) {
+                  return <div {...props}>{children}</div>;
+                }
+
+                return <p {...props}>{children}</p>;
+              },
+              a: ({ href, children, ...props }) => {
+                // PDF 링크 감지
+                if (href && /\.(pdf|doc|docx|xls|xlsx|ppt|pptx)$/i.test(href)) {
+                  const fileName = Array.isArray(children)
+                    ? children.join("")
+                    : String(children || "file");
+
+                  // PDF만 미리보기 지원
+                  if (/\.pdf$/i.test(href)) {
+                    return <PDFViewer url={href} fileName={fileName} />;
+                  }
+
+                  // 다른 파일은 다운로드 링크로
+                  return (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 underline"
+                      {...props}
+                    >
+                      {children}
+                    </a>
+                  );
+                }
+
+                // 일반 링크
+                return (
+                  <a href={href} {...props}>
+                    {children}
+                  </a>
+                );
+              },
+            }}
+          >
             {post.content || "내용이 없습니다."}
           </ReactMarkdown>
         </div>

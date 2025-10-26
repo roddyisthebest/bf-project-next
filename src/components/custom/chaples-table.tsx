@@ -31,6 +31,13 @@ const formatDate = (v: string | number | Date) =>
     day: "2-digit",
   }).format(new Date(v));
 
+const typeLabels: Record<string, string> = {
+  friday: "금요예배",
+  sunday: "주일예배",
+  wednesday: "수요예배",
+  special: "특별집회",
+};
+
 export function ChaplesTable({
   initialRows,
   total,
@@ -168,8 +175,8 @@ export function ChaplesTable({
                       <span className="font-medium">{r.title}</span>
                     </TableCell>
                     <TableCell>
-                      <span className="uppercase text-xs tracking-wide">
-                        {r.type ?? "-"}
+                      <span className="text-xs tracking-wide">
+                        {r.type ? typeLabels[r.type] || r.type : "-"}
                       </span>
                     </TableCell>
                     <TableCell className="text-muted-foreground">

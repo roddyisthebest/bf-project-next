@@ -55,24 +55,24 @@ export default async function WebPage() {
 
       {/* Pastor & Sermon Section */}
       <ScrollReveal>
-        <div className="grid grid-cols-[3fr_7fr] max-lg:grid-cols-[4fr_6fr] divide-x divide-brand-100 min-h-[500px]">
+        <div className="grid grid-cols-[3fr_7fr] max-lg:grid-cols-[4fr_6fr] max-md:grid-cols-1 max-md:divide-y max-md:divide-x-0 divide-x divide-brand-100 min-h-[500px] max-md:min-h-auto">
           <ScrollReveal direction="left">
-            <div className="p-5 flex flex-col gap-y-5 h-full">
+            <div className="p-5 flex flex-col gap-y-5 h-full max-md:h-auto">
               <div className="flex flex-col gap-y-1">
-                <Label className="text-primary font-bold text-xl">
+                <Label className="text-primary font-bold text-xl max-sm:text-lg">
                   MINISTOR
                 </Label>
-                <p className="text-neutral text-lg font-medium max-sm:flex max-sm:flex-col">
+                <p className="text-neutral text-lg font-medium max-sm:text-base max-sm:flex max-sm:flex-col">
                   담임목사 <strong className="text-black">이희동</strong>
                 </p>
               </div>
-              <div className="relative flex-1 rounded-lg overflow-hidden shadow-lg">
+              <div className="relative flex-1 min-h-[300px] max-md:min-h-[250px] max-sm:min-h-[200px] rounded-lg overflow-hidden shadow-lg">
                 <Image
                   src="/pastor.jpeg"
                   alt="이희동 목사"
                   fill
                   sizes="(max-width: 768px) 100vw, 400px"
-                  className="object-cover transition-transform duration-500 hover:scale-105"
+                  className="object-cover max-md:object-contain transition-transform duration-500 hover:scale-105"
                   priority
                 />
               </div>
