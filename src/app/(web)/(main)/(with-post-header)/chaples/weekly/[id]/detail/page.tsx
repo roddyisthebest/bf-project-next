@@ -8,7 +8,8 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { PrintButton } from "../../../../boards/[type]/[id]/detail/components/print-button";
 import { PDFViewer } from "@/components/ui/pdf-viewer";
-import React from "react";
+import React, { ReactNode } from "react";
+import type { Components } from "react-markdown";
 
 export default async function WeeklyDetailPage({ params }: PageProps) {
   const { id } = await params;
@@ -72,11 +73,15 @@ export default async function WeeklyDetailPage({ params }: PageProps) {
               p: ({ children, ...props }) => {
                 // p 태그 내부에 PDF 링크가 있는지 확인
                 const hasFileLink = React.Children.toArray(children).some(
-                  (child: any) => {
+                  (child: unknown) => {
                     return (
-                      child?.props?.href &&
+                      typeof child === 'object' &&
+                      child !== null &&
+                      'props' in child &&
+                      typeof (child as { props?: { href?: string } }).props === 'object' &&
+                      (child as { props: { href?: string } }).props.href &&
                       /\.(pdf|doc|docx|xls|xlsx|ppt|pptx)$/i.test(
-                        child.props.href
+                        (child as { props: { href: string } }).props.href
                       )
                     );
                   }
@@ -122,7 +127,7 @@ export default async function WeeklyDetailPage({ params }: PageProps) {
                   </a>
                 );
               },
-            }}
+            } as Components}
           >
             {post.content || "내용이 없습니다."}
           </ReactMarkdown>
