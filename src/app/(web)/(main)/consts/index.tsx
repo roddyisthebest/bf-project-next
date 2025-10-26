@@ -82,6 +82,10 @@ export const routes: Route[] = [
         href: "/chaples/friday",
       },
       {
+        title: "특별집회",
+        href: "/chaples/special",
+      },
+      {
         title: "주보",
         href: "/chaples/weekly",
       },
@@ -182,12 +186,8 @@ export const timeTable = [
   },
   {
     title: "새벽기도회",
-    content: "월-목 오전 05:00",
+    content: "월-금 오전 05:00",
   },
-  // {
-  //   title: "청년부 모임",
-  //   content: "주일 오후 1:00",
-  // },
 ];
 
 export const locationCoordinate = {

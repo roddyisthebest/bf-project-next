@@ -29,6 +29,7 @@ import { defaultPostBody } from "@/consts";
 import { PostType } from "@/enums";
 import { PostBody } from "@/types";
 import { createImageUploadCommand } from "./create-image-upload-command";
+import { createFileUploadCommand } from "./create-file-upload-command";
 import { commands, ICommand } from "@uiw/react-md-editor";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -78,6 +79,9 @@ export function PostForm({
 
   const toolbarCommands: ICommand[] = useMemo(() => {
     const customImage = createImageUploadCommand(() => {});
+    const customFile = createFileUploadCommand((url, fileName) => {
+      toast.success(`파일이 업로드되었습니다: ${fileName}`);
+    });
     return [
       commands.bold,
       commands.italic,
@@ -92,6 +96,7 @@ export function PostForm({
       commands.checkedListCommand,
       commands.table,
       customImage,
+      customFile,
       commands.fullscreen,
     ];
   }, []);

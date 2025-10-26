@@ -55,6 +55,12 @@ const enumOptions = ((): string[] => {
   return vals.filter((v) => typeof v === "string") as string[];
 })();
 
+const defaultTypeLabels: Record<string, string> = {
+  [ChapleType.Friday]: "금요예배",
+  [ChapleType.Sunday]: "주일예배",
+  [ChapleType.Special]: "특별집회",
+};
+
 export function ChapleForm({
   initialValues = defaultChaple,
   onSubmit,
@@ -70,7 +76,7 @@ export function ChapleForm({
 }) {
   const form = useForm<ChapleFormValues>({
     resolver: zodResolver(ChapleSchema),
-    defaultValues: defaultChaple,
+    defaultValues: initialValues,
     mode: "onChange",
   });
 
@@ -130,18 +136,14 @@ export function ChapleForm({
     form.reset({
       ...initialValues,
     });
+    console.log(initialValues, "initialValues");
   }, [initialValues, form]);
 
   return (
     <Form {...form}>
       <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-        <form
-          onSubmit={form.handleSubmit(handleSubmit)}
-          className="space-y-6"
-        >
-          <h1 className="text-2xl font-bold text-gray-900">
-            {submitText}
-          </h1>
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+          <h1 className="text-2xl font-bold text-gray-900">{submitText}</h1>
 
           {/* Title */}
           <FormField
@@ -190,7 +192,7 @@ export function ChapleForm({
                           value={opt}
                           className="focus:bg-gray-100 data-[highlighted]:bg-gray-100"
                         >
-                          {typeLabels?.[opt] ?? opt}
+                          {typeLabels?.[opt] ?? defaultTypeLabels[opt] ?? opt}
                         </SelectItem>
                       ))}
                     </SelectContent>

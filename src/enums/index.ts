@@ -9,6 +9,7 @@ export enum PostType {
 export enum ChapleType {
   Friday = "friday",
   Sunday = "sunday",
+  Special = "special",
 }
 
 export enum UserRole {
