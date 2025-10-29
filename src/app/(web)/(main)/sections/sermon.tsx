@@ -23,7 +23,7 @@ export default async function SermonSection() {
       <section className="p-5 flex flex-col gap-y-5 min-w-0">
         <div className="flex flex-col gap-y-1">
           <Label className="text-primary font-bold text-xl">SERMON</Label>
-          <p className="text-neutral text-lg font-medium">주일예배</p>
+          <p className="text-neutral text-lg font-medium">예배</p>
         </div>
 
         <div className="flex min-h-64 items-center justify-center rounded-lg border flex-col border-gray-200 bg-gray-50">
@@ -39,14 +39,27 @@ export default async function SermonSection() {
   }
 
   const recentChaple = chaples[0] as ChapleView;
-  const isFriday = recentChaple.type === ChapleType.Friday;
+
+  const getChapleName = (type: ChapleType | null) => {
+    switch (type) {
+      case ChapleType.Friday:
+        return "금요기도회";
+      case ChapleType.Sunday:
+        return "주일예배";
+      case ChapleType.Special:
+        return "특별집회";
+      default:
+        return "예배";
+    }
+  };
+
   return (
     <section className="p-5 flex flex-col gap-y-5 min-w-0">
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-y-1">
           <Label className="text-primary font-bold text-xl">SERMON</Label>
           <p className="text-neutral text-lg font-medium">
-            {isFriday ? "금요기도회" : "주일예배"}
+            {getChapleName(recentChaple.type)}
           </p>
         </div>
         <Link href="/chaples/sunday">
