@@ -230,7 +230,7 @@ export const churchVision = [
 export const churchFeatures = [
   {
     title: "생명있는 예배",
-    image: "/feature_01.png",
+    image: "/feature_01.jpeg",
     content: [
       "건강한 그리스도인들의 살아있는 예배",
       "하나님의 임재를 경험하는 예배",
@@ -239,7 +239,7 @@ export const churchFeatures = [
   },
   {
     title: "사랑이 넘치는 교제",
-    image: "/feature_02.png",
+    image: "/feature_02.jpeg",
     content: [
       "사랑방을 통한 성도들의 건강한 교제,",
       "말씀을 나누고 행복을 나누는 교제,",
@@ -248,7 +248,7 @@ export const churchFeatures = [
   },
   {
     title: "변화가 있는 훈련",
-    image: "/feature_03.png",
+    image: "/feature_03.jpeg",
     content: [
       "새가족반, 성장반, 제자훈련, 사역훈련 등",
       "철저히 훈련하고 교육하는 교회,",
@@ -257,7 +257,7 @@ export const churchFeatures = [
   },
   {
     title: "신바람나는 봉사",
-    image: "/feature_04.png",
+    image: "/feature_04.jpeg",
     content: [
       "소년소녀 가정들의 꿈을 심는 꿈나누기",
       "하나님과 사람을 섬기는 주님의 나무가 되어",
@@ -266,7 +266,7 @@ export const churchFeatures = [
   },
   {
     title: "땅끝까지 나아가는 선교",
-    image: "/feature_05.png",
+    image: "/feature_05.jpeg",
     content: [
       "한 사람의 영혼을 소중히 여기는 교회,",
       "한국을 베이스캠프로 삼아",
